@@ -1,0 +1,31 @@
+openapi: 3.0.3
+info:
+  title: Shunya (OTTS) - Auction Engine API
+  description: >
+    API for a real-time sports auction system featuring dynamic budget 
+    guardrails, automated countdowns, and administrative overrides.
+  version: 1.0.0
+  contact:
+    name: Shunya Development Team
+
+servers:
+  - url: /shunya
+    description: Local Development Server
+
+tags:
+  - name: Auth
+    description: Identity management (Signup/Login)
+  - name: Tournament
+    description: Orchestration of sporting events
+  - name: Auction
+    description: Real-time bidding engine and room logic
+
+# 1. PATHS - Define your endpoints here
+paths:
+  /auth/signup:
+    $ref: './paths/auth.yaml#/signup'
+  /auth/login:
+    $ref: './paths/auth.yaml#/login'
+  /tournament:
+    $ref: './paths/tournament.yaml#/base'
+
