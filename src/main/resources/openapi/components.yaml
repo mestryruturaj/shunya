@@ -88,6 +88,11 @@ components:
           format: password
           pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$'
           example: "password@123"
+      required:
+        - name
+        - email
+        - mobileNumber
+        - password
 
     LoginRequest:
       type: object
@@ -134,4 +139,288 @@ components:
           type: string
           example: "Login successful"
 
+    PlayerDto:
+      description: Complete player profile extending user with cricket-specific attributes
+      type: object
+      properties:
+        # User inherited properties
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the player
+          example: 101
+        name:
+          type: string
+          description: Full name of the player
+          example: "Virat Kohli"
+        email:
+          type: string
+          format: email
+          description: Player's email address
+          example: "virat.kohli@example.com"
+        role:
+          type: string
+          enum:
+            - ORGANIZER
+            - PLAYER
+          description: Role of the user in the system
+          example: "PLAYER"
+        
+        # Cricket-specific properties
+        type:
+          type: string
+          enum:
+            - BATTER
+            - BOWLER
+            - BATTING_ALLROUNDER
+            - BOWLING_ALLROUNDER
+            - WICKET_KEEPER
+          description: Cricket player type/role
+          example: "BATTING_ALLROUNDER"
+        
+        battingStyle:
+          type: string
+          enum:
+            - RIGHT_HANDED
+            - LEFT_HANDED
+          description: Batting hand orientation of the player
+          example: "RIGHT_HANDED"
+        
+        bowlingStyle:
+          type: string
+          enum:
+            - RIGHT_ARM_FAST
+            - RIGHT_ARM_MEDIUM
+            - RIGHT_ARM_SLOW
+            - LEFT_ARM_FAST
+            - LEFT_ARM_MEDIUM
+            - LEFT_ARM_SLOW
+            - OFF_BREAK
+            - LEG_BREAK
+            - CHINAMAN
+            - NOT_APPLICABLE
+          description: Bowling style (Not applicable for BATTER and WICKET_KEEPER)
+          example: "RIGHT_ARM_FAST"
+        
+        isCaptain:
+          type: boolean
+          description: Whether the player is a captain
+          example: false
+          default: false
+        
+        skillLevel:
+          type: string
+          enum:
+            - BEGINNER
+            - INTERMEDIATE
+            - ADVANCED
+            - EXPERT
+          description: Overall skill level of the player
+          example: "EXPERT"
+        
+        profileImageUrl:
+          type: string
+          format: uri
+          description: URL to player's profile image
+          example: "https://example.com/images/players/101.jpg"
+        
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - BANNED
+            - SUSPENDED
+          description: Current status of the player account
+          example: "ACTIVE"
+        
+        # Performance metrics
+        mobileNumber:
+          type: string
+          pattern: "[1-9][0-9]{9}"
+          description: Player's mobile number (10 digits)
+          example: "9876543210"
+        
+        country:
+          type: string
+          description: Player's country
+          example: "India"
+        
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when player account was created
+          example: "2025-01-15T10:30:00Z"
+        
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when player profile was last updated
+          example: "2026-03-29T15:45:00Z"
+      
+      required:
+        - id
+        - name
+        - email
+        - role
+        - type
+        - battingStyle
+        - isCaptain
+        - skillLevel
+        - status
+        - createdAt
 
+    PlayerCreateRequest:
+      description: Request payload for creating a new player
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the player
+          example: "Rohit Sharma"
+        email:
+          type: string
+          format: email
+          description: Player's email address
+          example: "rohit.sharma@example.com"
+        mobileNumber:
+          type: string
+          pattern: "[1-9][0-9]{9}"
+          description: Player's mobile number (10 digits)
+          example: "9876543210"
+        password:
+          type: string
+          format: password
+          pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$'
+          description: Password meeting security requirements
+          example: "SecurePass@123"
+        type:
+          type: string
+          enum:
+            - BATTER
+            - BOWLER
+            - BATTING_ALLROUNDER
+            - BOWLING_ALLROUNDER
+            - WICKET_KEEPER
+          description: Cricket player type/role
+          example: "BATTING_ALLROUNDER"
+        battingStyle:
+          type: string
+          enum:
+            - RIGHT_HANDED
+            - LEFT_HANDED
+          description: Batting hand orientation
+          example: "RIGHT_HANDED"
+        bowlingStyle:
+          type: string
+          enum:
+            - RIGHT_ARM_FAST
+            - RIGHT_ARM_MEDIUM
+            - RIGHT_ARM_SLOW
+            - LEFT_ARM_FAST
+            - LEFT_ARM_MEDIUM
+            - LEFT_ARM_SLOW
+            - OFF_BREAK
+            - LEG_BREAK
+            - CHINAMAN
+            - NOT_APPLICABLE
+          description: Bowling style (optional for non-bowlers)
+          example: "NOT_APPLICABLE"
+        country:
+          type: string
+          description: Player's country
+          example: "India"
+        skillLevel:
+          type: string
+          enum:
+            - BEGINNER
+            - INTERMEDIATE
+            - ADVANCED
+            - EXPERT
+          description: Player's initial skill level
+          example: "INTERMEDIATE"
+        profileImageUrl:
+          type: string
+          format: uri
+          description: URL to player's profile image
+          example: "https://example.com/images/players/101.jpg"
+      required:
+        - name
+        - email
+        - mobileNumber
+        - password
+        - type
+        - battingStyle
+        - skillLevel
+
+    PlayerUpdateRequest:
+      description: Request payload for updating player information
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the player
+          example: "Rohit Sharma"
+        profileImageUrl:
+          type: string
+          format: uri
+          description: URL to player's profile image
+          example: "https://example.com/images/players/101.jpg"
+        country:
+          type: string
+          description: Player's country
+          example: "India"
+        type:
+          type: string
+          enum:
+            - BATTER
+            - BOWLER
+            - BATTING_ALLROUNDER
+            - BOWLING_ALLROUNDER
+            - WICKET_KEEPER
+          description: Cricket player type/role
+          example: "BATTING_ALLROUNDER"
+        battingStyle:
+          type: string
+          enum:
+            - RIGHT_HANDED
+            - LEFT_HANDED
+          description: Batting hand orientation
+          example: "RIGHT_HANDED"
+        bowlingStyle:
+          type: string
+          enum:
+            - RIGHT_ARM_FAST
+            - RIGHT_ARM_MEDIUM
+            - RIGHT_ARM_SLOW
+            - LEFT_ARM_FAST
+            - LEFT_ARM_MEDIUM
+            - LEFT_ARM_SLOW
+            - OFF_BREAK
+            - LEG_BREAK
+            - CHINAMAN
+            - NOT_APPLICABLE
+          description: Bowling style (optional for non-bowlers)
+          example: "RIGHT_ARM_FAST"
+        isCaptain:
+          type: boolean
+          description: Whether the player is a captain
+          example: false
+        skillLevel:
+          type: string
+          enum:
+            - BEGINNER
+            - INTERMEDIATE
+            - ADVANCED
+            - EXPERT
+          description: Updated skill level of the player
+          example: "ADVANCED"
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - BANNED
+            - SUSPENDED
+          description: Updated status of the player account
+          example: "ACTIVE"
