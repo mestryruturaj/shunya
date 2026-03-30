@@ -4,6 +4,7 @@ player:
     summary: Create Player
     tags:
       - Player
+    operationId: createPlayer
     security:
       - bearerAuth: [ ]
     requestBody:
@@ -32,6 +33,7 @@ player:
     summary: Get Players
     tags:
       - Player
+    operationId: getPlayers
     security:
       - bearerAuth: [ ]
     responses:
@@ -53,6 +55,7 @@ player:
     summary: Update Player
     tags:
       - Player
+    operationId: updatePlayer
     security:
       - bearerAuth: [ ]
     requestBody:
@@ -75,14 +78,15 @@ player:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
-  
-  
+
+
 playerById:
   get:
     description: Retrieve a specific player by their unique identifier
     summary: Get Player By ID
     tags:
       - Player
+    operationId: getPlayerById
     security:
       - bearerAuth: [ ]
     parameters:
@@ -118,6 +122,7 @@ playerById:
     summary: Delete Player By ID
     tags:
       - Player
+    operationId: deletePlayerById
     security:
       - bearerAuth: [ ]
     parameters:
@@ -131,8 +136,12 @@ playerById:
           minimum: 1
           example: 123
     responses:
-      '204':
+      '200':
         description: Player deleted successfully (no content returned)
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/PlayerDto'
       '401':
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '404':
