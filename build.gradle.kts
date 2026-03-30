@@ -53,12 +53,13 @@ openApiGenerate {
 	inputSpec.set("$projectDir/src/main/resources/openapi/shunya-spec.yaml")
 	outputDir.set("$buildDir/generated")
 	configOptions.set(mapOf(
-		"interfaceOnly" to "true",         // Generates only the interfaces
-		"delegatePattern" to "true",      // CRITICAL: Generates the Delegate interface
-		"skipDefaultInterface" to "false", // Ensures methods have default implementations
+		"interfaceOnly" to "false",
+		"delegatePattern" to "true",
+		"delegatePackage" to "io.two.bit.saint.shunya.delegate",
+		"skipDefaultInterface" to "false",
 		"useSpringBoot3" to "true",
 		"useTags" to "true",
-		"ResponseEntity" to "true"        // Ensures return types are Wrapped in ResponseEntity
+		"ResponseEntity" to "true"
 	))
 }
 
@@ -66,7 +67,7 @@ openApiGenerate {
 sourceSets {
 	main {
 		java {
-			srcDir("${buildDir}/generated-sources/src/main/java")
+			srcDir("${buildDir}/generated/src/main/java")
 		}
 	}
 }
