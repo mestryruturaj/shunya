@@ -68,10 +68,6 @@ components:
       description: User registration details for creating a new account
       type: object
       properties:
-        name:
-          description: Full name of the user
-          type: string
-          example: "John Doe"
         email: 
           description: User email address for account creation
           type: string
@@ -89,7 +85,6 @@ components:
           pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$'
           example: "password@123"
       required:
-        - name
         - email
         - mobileNumber
         - password
@@ -153,11 +148,6 @@ components:
           type: string
           description: Full name of the player
           example: "Virat Kohli"
-        email:
-          type: string
-          format: email
-          description: Player's email address
-          example: "virat.kohli@example.com"
         role:
           type: string
           enum:
@@ -167,17 +157,16 @@ components:
           example: "PLAYER"
         
         # Cricket-specific properties
-        type:
-          type: string
-          enum:
-            - BATTER
-            - BOWLER
-            - BATTING_ALLROUNDER
-            - BOWLING_ALLROUNDER
-            - WICKET_KEEPER
-          description: Cricket player type/role
-          example: "BATTING_ALLROUNDER"
-        
+        strengths:
+          type: array
+          items:
+            type: string
+            enum:
+              - BATTER
+              - BOWLER
+              - WICKET_KEEPER
+          description: Player's cricket strengths/roles
+          example: [ "BATTER", "WICKET_KEEPER" ]
         battingStyle:
           type: string
           enum:
@@ -185,7 +174,6 @@ components:
             - LEFT_HANDED
           description: Batting hand orientation of the player
           example: "RIGHT_HANDED"
-        
         bowlingStyle:
           type: string
           enum:
@@ -201,13 +189,6 @@ components:
             - NOT_APPLICABLE
           description: Bowling style (Not applicable for BATTER and WICKET_KEEPER)
           example: "RIGHT_ARM_FAST"
-        
-        isCaptain:
-          type: boolean
-          description: Whether the player is a captain
-          example: false
-          default: false
-        
         skillLevel:
           type: string
           enum:
@@ -217,13 +198,6 @@ components:
             - EXPERT
           description: Overall skill level of the player
           example: "EXPERT"
-        
-        profileImageUrl:
-          type: string
-          format: uri
-          description: URL to player's profile image
-          example: "https://example.com/images/players/101.jpg"
-        
         status:
           type: string
           enum:
@@ -233,39 +207,32 @@ components:
             - SUSPENDED
           description: Current status of the player account
           example: "ACTIVE"
-        
-        # Performance metrics
         mobileNumber:
           type: string
           pattern: "[1-9][0-9]{9}"
           description: Player's mobile number (10 digits)
           example: "9876543210"
-        
         country:
           type: string
           description: Player's country
           example: "India"
-        
         createdAt:
           type: string
           format: date-time
           description: Timestamp when player account was created
           example: "2025-01-15T10:30:00Z"
-        
         updatedAt:
           type: string
           format: date-time
           description: Timestamp when player profile was last updated
           example: "2026-03-29T15:45:00Z"
-      
       required:
         - id
         - name
         - email
         - role
-        - type
+        - strengths
         - battingStyle
-        - isCaptain
         - skillLevel
         - status
         - createdAt
@@ -278,32 +245,16 @@ components:
           type: string
           description: Full name of the player
           example: "Rohit Sharma"
-        email:
-          type: string
-          format: email
-          description: Player's email address
-          example: "rohit.sharma@example.com"
-        mobileNumber:
-          type: string
-          pattern: "[1-9][0-9]{9}"
-          description: Player's mobile number (10 digits)
-          example: "9876543210"
-        password:
-          type: string
-          format: password
-          pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$'
-          description: Password meeting security requirements
-          example: "SecurePass@123"
-        type:
-          type: string
-          enum:
-            - BATTER
-            - BOWLER
-            - BATTING_ALLROUNDER
-            - BOWLING_ALLROUNDER
-            - WICKET_KEEPER
-          description: Cricket player type/role
-          example: "BATTING_ALLROUNDER"
+        strengths:
+          type: array
+          items:
+            type: string
+            enum:
+              - BATTER
+              - BOWLER
+              - WICKET_KEEPER
+          description: Player's cricket strengths/roles
+          example: [ "BATTER", "WICKET_KEEPER" ]
         battingStyle:
           type: string
           enum:
@@ -346,10 +297,7 @@ components:
           example: "https://example.com/images/players/101.jpg"
       required:
         - name
-        - email
-        - mobileNumber
-        - password
-        - type
+        - strengths
         - battingStyle
         - skillLevel
 
@@ -370,16 +318,16 @@ components:
           type: string
           description: Player's country
           example: "India"
-        type:
-          type: string
-          enum:
-            - BATTER
-            - BOWLER
-            - BATTING_ALLROUNDER
-            - BOWLING_ALLROUNDER
-            - WICKET_KEEPER
-          description: Cricket player type/role
-          example: "BATTING_ALLROUNDER"
+        strengths:
+          type: array
+          items:
+            type: string
+            enum:
+              - BATTER
+              - BOWLER
+              - WICKET_KEEPER
+          description: Player's cricket strengths/roles
+          example: [ "BATTER", "WICKET_KEEPER" ]
         battingStyle:
           type: string
           enum:
@@ -402,10 +350,6 @@ components:
             - NOT_APPLICABLE
           description: Bowling style (optional for non-bowlers)
           example: "RIGHT_ARM_FAST"
-        isCaptain:
-          type: boolean
-          description: Whether the player is a captain
-          example: false
         skillLevel:
           type: string
           enum:
