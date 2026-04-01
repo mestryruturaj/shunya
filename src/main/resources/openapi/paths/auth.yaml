@@ -4,6 +4,7 @@ signup:
     description: Register a new user account
     tags:
       - Auth
+    operationId: signup
     requestBody:
       required: true
       content:
@@ -28,6 +29,7 @@ login:
     description: Authenticate user and return JWT token
     tags:
       - Auth
+    operationId: login
     requestBody:
       required: true
       content:

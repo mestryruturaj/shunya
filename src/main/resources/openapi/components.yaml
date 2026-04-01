@@ -1,6 +1,6 @@
 components:
   securitySchemes:
-    bearerAuth:            # For JWT Integration
+    bearerAuth: # For JWT Integration
       type: http
       scheme: bearer
       bearerFormat: JWT
@@ -34,15 +34,12 @@ components:
         id:
           type: integer
           format: int64
-        name:
-          type: string
         email:
           type: string
-        role:
+          format: email
+        mobileNumber:
           type: string
-          enum:
-            - ORGANIZER
-            - PLAYER
+          pattern: "[1-9][0-9]{9}"
 
     ErrorDto:
       type: object
@@ -72,7 +69,7 @@ components:
           description: Full name of the user
           type: string
           example: "John Doe"
-        email: 
+        email:
           description: User email address for account creation
           type: string
           format: email
@@ -115,8 +112,8 @@ components:
       required:
         - password
       oneOf:
-        - required: [email]
-        - required: [mobileNumber]
+        - required: [ email ]
+        - required: [ mobileNumber ]
 
     LoginResponse:
       description: Response object for successful login containing JWT token and user details
