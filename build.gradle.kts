@@ -1,8 +1,8 @@
 plugins {
 	java
 	id("org.springframework.boot") version "4.0.5"
-	id("io.spring.dependency-management") version "1.1.5"
-	id("org.openapi.generator") version "7.4.0"
+	id("io.spring.dependency-management") version "1.1.7"
+	id("org.openapi.generator") version "7.21.0"
 }
 
 group = "io.two.bit.saint"
@@ -85,5 +85,9 @@ sourceSets {
 tasks.compileJava {
 	dependsOn(tasks.openApiGenerate)
 	options.annotationProcessorPath = configurations.annotationProcessor.get()
+}
+
+springBoot {
+	mainClass.set("io.two.bit.saint.shunya.ShunyaApplication")
 }
 
