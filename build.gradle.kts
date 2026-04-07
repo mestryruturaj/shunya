@@ -87,3 +87,7 @@ tasks.compileJava {
 	options.annotationProcessorPath = configurations.annotationProcessor.get()
 }
 
+springBoot {
+	mainClass.set("io.two.bit.saint.shunya.ShunyaApplication")
+}
+
