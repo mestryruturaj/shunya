@@ -30,6 +30,13 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",
+            nullable = false,
+            unique = true,
+            referencedColumnName = "is")
+    private User user;
+
     private String name;
 
     private boolean canBat;
