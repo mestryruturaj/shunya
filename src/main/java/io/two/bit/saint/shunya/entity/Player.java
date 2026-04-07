@@ -1,6 +1,9 @@
 package io.two.bit.saint.shunya.entity;
 
-import io.two.bit.saint.shunya.enums.player.*;
+import io.two.bit.saint.shunya.enums.player.BattingStyleEnum;
+import io.two.bit.saint.shunya.enums.player.BowlingStyleEnum;
+import io.two.bit.saint.shunya.enums.player.SkillLevelEnum;
+import io.two.bit.saint.shunya.enums.player.StatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,15 +13,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Player entity representing a cricket player profile
  * Extends the User entity with cricket-specific attributes
  */
 @Entity
-@Table(name = "player")
+@Table(name = "players")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,33 +28,22 @@ public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private RoleEnum role;
+    private boolean canBat;
 
-    /**
-     * Player's cricket strengths/roles
-     * Uses ElementCollection for storing multiple enum values
-     */
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "player_strengths", joinColumns = @JoinColumn(name = "player_id"))
-    @Column(name = "strength")
-    @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private Set<StrengthEnum> strengths = new HashSet<>();
+    private boolean canBowl;
+
+    private boolean canKeepWicket;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "batting_style", nullable = false)
     private BattingStyleEnum battingStyle;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "bowling_style")
+    @Column(name = "bowling_style", nullable = false)
     private BowlingStyleEnum bowlingStyle;
 
     @Enumerated(EnumType.STRING)
