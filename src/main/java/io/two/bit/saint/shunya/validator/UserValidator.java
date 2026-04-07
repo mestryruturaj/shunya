@@ -13,6 +13,7 @@ public class UserValidator {
     }
 
     public void validateEmailAndMobileNumberUniqueness(String email, String mobileNumber) {
+
         if (userRepository.findByEmail(email).isPresent()) {
             throw new IllegalArgumentException("Email already exists");
         }

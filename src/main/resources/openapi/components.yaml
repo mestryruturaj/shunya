@@ -94,20 +94,17 @@ components:
           description: User email address used for login
           type: string
           format: email
-          nullable: true
           example: "username@domain.com"
         mobileNumber:
           description: User mobile number used for login (alternative to email)
           type: string
           pattern: "[1-9][0-9]{9}"
-          nullable: true
           example: "9876543210"
         password:
           description: User password for authentication
           type: string
           format: password
           pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$'
-          nullable: false
           example: "password123"
       required:
         - password
