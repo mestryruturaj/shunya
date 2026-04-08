@@ -25,16 +25,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Player {
-
+    private static final String ID = "id";
+    private static final String USER_ID = "user_id";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id",
+    @JoinColumn(name = USER_ID,
             nullable = false,
             unique = true,
-            referencedColumnName = "is")
+            referencedColumnName = ID)
     private User user;
 
     private String name;
