@@ -142,25 +142,18 @@ components:
           type: string
           description: Full name of the player
           example: "Virat Kohli"
-        role:
-          type: string
-          enum:
-            - ORGANIZER
-            - PLAYER
-          description: Role of the user in the system
-          example: "PLAYER"
-
-        # Cricket-specific properties
-        strengths:
-          type: array
-          items:
-            type: string
-            enum:
-              - BATTER
-              - BOWLER
-              - WICKET_KEEPER
-          description: Player's cricket strengths/roles
-          example: [ "BATTER", "WICKET_KEEPER" ]
+        canBat:
+          type: boolean
+          description: Indicates if the player can bat
+          example: true
+        canBowl:
+          type: boolean
+          description: Indicates if the player can bowl
+          example: false
+        canKeepWickets:
+          type: boolean
+          description: Indicates if the player can keep wickets
+          example: false
         battingStyle:
           type: string
           enum:
@@ -201,11 +194,6 @@ components:
             - SUSPENDED
           description: Current status of the player account
           example: "ACTIVE"
-        mobileNumber:
-          type: string
-          pattern: "[1-9][0-9]{9}"
-          description: Player's mobile number (10 digits)
-          example: "9876543210"
         country:
           type: string
           description: Player's country
@@ -220,16 +208,6 @@ components:
           format: date-time
           description: Timestamp when player profile was last updated
           example: "2026-03-29T15:45:00Z"
-      required:
-        - id
-        - name
-        - email
-        - role
-        - strengths
-        - battingStyle
-        - skillLevel
-        - status
-        - createdAt
 
     PlayerCreateRequest:
       description: Request payload for creating a new player
