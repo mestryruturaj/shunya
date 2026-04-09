@@ -67,7 +67,19 @@ openApiGenerate {
 		"skipDefaultInterface" to "false",
 		"useSpringBoot3" to "true",
 		"useTags" to "true",
-		"ResponseEntity" to "true"
+		"ResponseEntity" to "true",
+		"dateLibrary" to "java8",
+	))
+	// GLOBAL TYPE MAPPING
+	// This tells the generator to use 'LocalDateTime' instead of the default 'OffsetDateTime'
+	typeMappings.set(mapOf(
+		"DateTime" to "LocalDateTime"
+	))
+
+	// GLOBAL IMPORT MAPPING
+	// This ensures the generated files include the correct java.time import
+	importMappings.set(mapOf(
+		"LocalDateTime" to "java.time.LocalDateTime"
 	))
 }
 
