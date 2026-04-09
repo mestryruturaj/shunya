@@ -6,7 +6,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.openapitools.model.PlayerCreateRequest;
-import org.openapitools.model.UserDto;
+import org.openapitools.model.PlayerDto;
 
 import java.net.URI;
 
@@ -17,7 +17,7 @@ public interface PlayerMapper {
     @Mapping(target = "profileImageUrl", source = "profileImageUrl", qualifiedByName = "mapImageUriToString")
     public Player mapPlayerEntityFromPlayerCreateRequest(PlayerCreateRequest playerCreateRequest);
 
-    public UserDto mapUserDtoFromPlayerEntity(Player player);
+    public PlayerDto mapPlayerDtoFromPlayerEntity(Player player);
 
     @Named("mapImageUriToString")
     default String mapImageUriToString(URI imageUrl) {
