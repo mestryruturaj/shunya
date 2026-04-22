@@ -17,10 +17,15 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         auth -> auth
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
-                .addFilterBefore(new TraceIdFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(traceIdFilter(), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
+    }
+
+    @Bean
+    public TraceIdFilter traceIdFilter() {
+        return new TraceIdFilter();
     }
 }
