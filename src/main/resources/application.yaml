@@ -21,3 +21,9 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  pattern:
+    # The %X{traceId} is the magic part.
+    # It tells the logger: "Look into MDC, find the key 'traceId', and print it here."
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%X{traceId}] --- [%thread] %logger{12} : %msg%n"

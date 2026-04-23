@@ -31,6 +31,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	runtimeOnly("com.mysql:mysql-connector-j")
 
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	testImplementation("org.springframework.security:spring-security-test")
+
 	// 2. OpenAPI & Swagger Support
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5")
 	implementation("org.openapitools:jackson-databind-nullable:0.2.6")
