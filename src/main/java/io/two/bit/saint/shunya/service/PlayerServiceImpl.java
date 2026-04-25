@@ -26,21 +26,27 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDto createPlayer(PlayerCreateRequest playerCreateRequest) {
-        User existingUser = playerValidator.validateCreatePlayerRequestForUserAndPlayer(playerCreateRequest);
-        Player newPlayer = playerMapper.mapPlayerEntityFromPlayerCreateRequest(playerCreateRequest);
+        User existingUser = playerValidator.validatePlayerCreateRequest(playerCreateRequest);
+        Player newPlayer = playerMapper.mapToPlayerEntityFromPlayerCreateRequest(playerCreateRequest);
         newPlayer.setUser(existingUser);
         Player savedPlayer = playerRepository.save(newPlayer);
-        return playerMapper.mapPlayerDtoFromPlayerEntity(savedPlayer);
+        return playerMapper.mapToPlayerDtoFromPlayerEntity(savedPlayer);
     }
 
     @Override
     public List<PlayerDto> getPlayers() {
-        return PlayerService.super.getPlayers();
+        return playerRepository.findAll().stream()
+                .map(player -> playerMapper.mapToPlayerDtoFromPlayerEntity(player))
+                .toList();
     }
 
     @Override
-    public PlayerDto updatePlayer(PlayerUpdateRequest playerUpdateRequest) {
-        return PlayerService.super.updatePlayer(playerUpdateRequest);
+    public PlayerDto updatePlayer(Long playerId, PlayerUpdateRequest playerUpdateRequest) {
+        playerValidator.validatePlayerExistToUpdateOrDelete(playerId);
+        Player player = playerMapper.mapToPlayerEntityFromPlayerUpdateRequest(playerUpdateRequest);
+        player.setId(playerId);
+        Player updatedPlayer = playerRepository.save(player);
+        return playerMapper.mapToPlayerDtoFromPlayerEntity(updatedPlayer);
     }
 
     @Override

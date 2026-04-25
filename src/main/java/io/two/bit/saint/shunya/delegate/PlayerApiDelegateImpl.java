@@ -6,7 +6,6 @@ import org.openapitools.model.PlayerCreateRequest;
 import org.openapitools.model.PlayerDto;
 import org.openapitools.model.PlayerUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -26,13 +25,7 @@ public class PlayerApiDelegateImpl implements PlayerApiDelegate {
      */
     @Override
     public ResponseEntity<PlayerDto> createPlayer(PlayerCreateRequest playerCreateRequest) {
-        // TODO: Implement player creation logic
-        // 1. Validate the playerCreateRequest
-        // 2. Check if email/mobile already exists
-        // 3. Create new player entity
-        // 4. Persist to database
-        // 5. Return created player with 201 CREATED status
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok(playerService.createPlayer(playerCreateRequest));
     }
 
     /**
@@ -56,14 +49,9 @@ public class PlayerApiDelegateImpl implements PlayerApiDelegate {
      * @return ResponseEntity containing updated PlayerDto with 200 status
      */
     @Override
-    public ResponseEntity<PlayerDto> updatePlayer(PlayerUpdateRequest playerUpdateRequest) {
-        // TODO: Implement player update logic
-        // 1. Validate the playerUpdateRequest
-        // 2. Find player by ID (should be extracted from security context or request body)
-        // 3. Update allowed fields
-        // 4. Persist changes to database
-        // 5. Return updated player with 200 OK status
-        return ResponseEntity.ok().build();
+    public ResponseEntity<PlayerDto> updatePlayer(Long playerId,
+                                                  PlayerUpdateRequest playerUpdateRequest) {
+        return ResponseEntity.ok(playerService.updatePlayer(playerId, playerUpdateRequest));
     }
 
     /**

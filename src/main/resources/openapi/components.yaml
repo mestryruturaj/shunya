@@ -218,16 +218,6 @@ components:
           format: int64
           description: Unique identifier of the user associated with the player profile
           example: 101
-        email:
-          type: string
-          format: email
-          description: Email address of the player (must be unique)
-          example: "email_id@domain.com"
-        mobileNumber:
-          type: string
-          pattern: "[1-9][0-9]{9}"
-          description: Mobile number of the player (10 digits)
-          example: "9876543210"
         name:
           type: string
           description: Full name of the player
@@ -298,25 +288,18 @@ components:
           type: string
           description: Full name of the player
           example: "Rohit Sharma"
-        profileImageUrl:
-          type: string
-          format: uri
-          description: URL to player's profile image
-          example: "https://example.com/images/players/101.jpg"
-        country:
-          type: string
-          description: Player's country
-          example: "India"
-        strengths:
-          type: array
-          items:
-            type: string
-            enum:
-              - BATTER
-              - BOWLER
-              - WICKET_KEEPER
-          description: Player's cricket strengths/roles
-          example: [ "BATTER", "WICKET_KEEPER" ]
+        canBat:
+          type: boolean
+          description: Indicates if the player can bat
+          example: true
+        canBowl:
+          type: boolean
+          description: Indicates if the player can bowl
+          example: false
+        canKeepWickets:
+          type: boolean
+          description: Indicates if the player can keep wickets
+          example: true
         battingStyle:
           type: string
           enum:
@@ -338,7 +321,11 @@ components:
             - CHINAMAN
             - NOT_APPLICABLE
           description: Bowling style (optional for non-bowlers)
-          example: "RIGHT_ARM_FAST"
+          example: "NOT_APPLICABLE"
+        country:
+          type: string
+          description: Player's country
+          example: "India"
         skillLevel:
           type: string
           enum:
@@ -346,14 +333,24 @@ components:
             - INTERMEDIATE
             - ADVANCED
             - EXPERT
-          description: Updated skill level of the player
-          example: "ADVANCED"
-        status:
+          description: Player's skill level
+          example: "INTERMEDIATE"
+        profileImageUrl:
           type: string
-          enum:
-            - ACTIVE
-            - INACTIVE
-            - BANNED
-            - SUSPENDED
-          description: Updated status of the player account
-          example: "ACTIVE"
+          format: uri
+          description: URL to player's profile image
+          example: "https://example.com/images/players/101.jpg"
+
+
+parameters:
+  # Path Parameters
+  playerId:
+    name: playerId
+    in: path
+    description: Unique identifier of the player (must be a positive integer)
+    required: true
+    schema:
+      type: integer
+      format: int64
+      minimum: 1
+    example: 123
