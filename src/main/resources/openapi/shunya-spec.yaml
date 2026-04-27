@@ -26,4 +26,8 @@ paths:
     $ref: './paths/auth.yaml#/signup'
   /auth/login:
     $ref: './paths/auth.yaml#/login'
+  /player:
+    $ref: './paths/player.yaml#/player'
+  /player/{playerId}:
+    $ref: './paths/player.yaml#/playerById'
 
