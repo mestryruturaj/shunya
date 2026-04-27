@@ -35,11 +35,7 @@ public class PlayerApiDelegateImpl implements PlayerApiDelegate {
      */
     @Override
     public ResponseEntity<List<PlayerDto>> getPlayers() {
-        // TODO: Implement fetch all players logic
-        // 1. Query all active players from database
-        // 2. Convert to PlayerDto
-        // 3. Return list with 200 OK status
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(playerService.getPlayers());
     }
 
     /**
@@ -62,12 +58,7 @@ public class PlayerApiDelegateImpl implements PlayerApiDelegate {
      */
     @Override
     public ResponseEntity<PlayerDto> getPlayerById(Long playerId) {
-        // TODO: Implement fetch player by ID logic
-        // 1. Validate playerId (must be positive)
-        // 2. Find player by ID in database
-        // 3. If found, convert to PlayerDto and return with 200 OK
-        // 4. If not found, return 404 NOT FOUND with ErrorDto
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(playerService.getPlayerById(playerId));
     }
 
     /**
@@ -78,11 +69,6 @@ public class PlayerApiDelegateImpl implements PlayerApiDelegate {
      */
     @Override
     public ResponseEntity<PlayerDto> deletePlayerById(Long playerId) {
-        // TODO: Implement delete player logic
-        // 1. Validate playerId (must be positive)
-        // 2. Find player by ID in database
-        // 3. If found, delete player and return 204 NO CONTENT
-        // 4. If not found, return 404 NOT FOUND with ErrorDto
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(playerService.deletePlayer(playerId));
     }
 }

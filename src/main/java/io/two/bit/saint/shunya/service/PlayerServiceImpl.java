@@ -3,6 +3,7 @@ package io.two.bit.saint.shunya.service;
 import io.two.bit.saint.shunya.dao.PlayerRepository;
 import io.two.bit.saint.shunya.entity.Player;
 import io.two.bit.saint.shunya.entity.User;
+import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.PlayerMapper;
 import io.two.bit.saint.shunya.validator.PlayerValidator;
 import org.openapitools.model.PlayerCreateRequest;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -50,12 +52,16 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public PlayerDto getPlayerById(String playerId) {
-        return PlayerService.super.getPlayerById(playerId);
+    public PlayerDto getPlayerById(Long playerId) {
+        Optional<Player> playerOptional = playerRepository.findById(playerId);
+        Player player = playerOptional.orElseThrow(() -> new InvalidArgumentException("Player with id " + playerId + " does not exist"));
+        return playerMapper.mapToPlayerDtoFromPlayerEntity(player);
     }
 
     @Override
-    public PlayerDto deletePlayer(String playerId) {
-        return PlayerService.super.deletePlayer(playerId);
+    public PlayerDto deletePlayer(Long playerId) {
+        Optional<Player> playerOptional = playerRepository.findById(playerId);
+        Player player = playerOptional.orElseThrow(() -> new InvalidArgumentException("Player with id " + playerId + " does not exist"));
+        return playerMapper.mapToPlayerDtoFromPlayerEntity(player);
     }
 }

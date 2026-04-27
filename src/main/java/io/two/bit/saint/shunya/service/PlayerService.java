@@ -21,11 +21,11 @@ public interface PlayerService {
         return null;
     }
 
-    default PlayerDto getPlayerById(String playerId) {
+    default PlayerDto getPlayerById(Long playerId) {
         return null;
     }
 
-    default PlayerDto deletePlayer(String playerId) {
+    default PlayerDto deletePlayer(Long playerId) {
         return null;
     }
 }
