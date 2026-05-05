@@ -1,0 +1,27 @@
+tournament:
+  post:
+    tags:
+      - Tournament
+    operationId: createTournament
+    summary: Create a new tournament
+    description: >
+      Endpoint to create a new tournament with specified details.
+    requestBody:
+      required: true
+      content:
+        application//json:
+          schema:
+            $ref: '../components.yaml#/components/schemas/TournamentCreateRequest'
+    responses:
+      '201':
+        description: Tournament created successfully
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/TournamentResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
