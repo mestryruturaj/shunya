@@ -32,4 +32,6 @@ paths:
     $ref: './paths/player.yaml#/playerById'
   /tournament:
     $ref: './paths/tournament.yaml#/tournament'
+  /tournament/{tournament-id}:
+    $ref: './paths/tournament.yaml#/tournamentById'
 

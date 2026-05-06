@@ -383,6 +383,16 @@ parameters:
       minimum: 1
     example: 123
 
+  tournamentId:
+    name: tournament-id
+    in: path
+    description: Unique identifier of the tournament (must be a positive integer)
+    schema:
+      type: integer
+      format: int64
+      minimum: 1
+    example: 123
+
 properties:
   id:
     type: integer
