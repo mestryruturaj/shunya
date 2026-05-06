@@ -25,3 +25,27 @@ tournament:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+
+tournamentById:
+  get:
+    tags:
+      - Tournament
+    operationId: getTournamentById
+    summary: Get tournament details by ID
+    description: >
+      Retrieve detailed information about a specific tournament using its unique identifier.
+    parameters:
+      - $ref: '../components.yaml#/parameters/tournamentId'
+    responses:
+      '200':
+        description: Tournament details retrieved successfully
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/TournamentResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
