@@ -9,7 +9,7 @@ tournament:
     requestBody:
       required: true
       content:
-        application//json:
+        application/json:
           schema:
             $ref: '../components.yaml#/components/schemas/TournamentCreateRequest'
     responses:
