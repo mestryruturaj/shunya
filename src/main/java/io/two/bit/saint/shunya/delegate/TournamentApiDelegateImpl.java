@@ -18,4 +18,9 @@ public class TournamentApiDelegateImpl implements TournamentApiDelegate {
     public ResponseEntity<TournamentResponse> createTournament(TournamentCreateRequest tournamentCreateRequest) {
         return new ResponseEntity<>(tournamentService.createTournament(tournamentCreateRequest), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<TournamentResponse> getTournamentById(Long tournamentId) {
+        return ResponseEntity.ok(tournamentService.getTournamentById(tournamentId));
+    }
 }

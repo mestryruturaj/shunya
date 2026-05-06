@@ -5,4 +5,6 @@ import org.openapitools.model.TournamentResponse;
 
 public interface TournamentService {
     TournamentResponse createTournament(TournamentCreateRequest tournamentCreateRequest);
+
+    TournamentResponse getTournamentById(Long tournamentId);
 }
