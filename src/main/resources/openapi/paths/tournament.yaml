@@ -49,3 +49,31 @@ tournamentById:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+  put:
+    tags:
+      - Tournament
+    operationId: updateTournamentById
+    summary: Update tournament details by ID
+    description: >
+      Update the details of an existing tournament using its unique identifier.
+    parameters:
+      - $ref: '../components.yaml#/parameters/tournamentId'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../components.yaml#/components/schemas/TournamentUpdateRequest'
+    responses:
+      '200':
+        description: Tournament updated successfully
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/TournamentResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'

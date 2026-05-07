@@ -349,6 +349,18 @@ components:
           $ref: '#/properties/title'
         country:
           $ref: '#/properties/country'
+      required:
+        - title
+        - country
+
+    TournamentUpdateRequest:
+      description: Request payload for creating a new tournament
+      type: object
+      properties:
+        title:
+          $ref: '#/properties/title'
+        country:
+          $ref: '#/properties/country'
 
     TournamentResponse:
       description: Response object for tournament details
