@@ -7,6 +7,7 @@ import io.two.bit.saint.shunya.mapper.TournamentMapper;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.TournamentCreateRequest;
 import org.openapitools.model.TournamentResponse;
+import org.openapitools.model.TournamentUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -29,6 +30,20 @@ public class TournamentServiceImpl implements TournamentService {
         Optional<Tournament> tournamentOptional = tournamentRepository.findById(tournamentId);
         if (tournamentOptional.isPresent()) {
             return tournamentMapper.mapToTournamentResponseFromTournament(tournamentOptional.get());
+        } else {
+            throw new InvalidArgumentException("Tournament not found with id: " + tournamentId);
+        }
+    }
+
+    @Override
+    public TournamentResponse updateTournament(Long tournamentId, TournamentUpdateRequest tournamentUpdateRequest) {
+        Optional<Tournament> tournamentOptional = tournamentRepository.findById(tournamentId);
+        if (tournamentOptional.isPresent()) {
+            Tournament tournamentToUpdate = tournamentOptional.get();
+            tournamentToUpdate.setTitle(tournamentUpdateRequest.getTitle());
+            tournamentToUpdate.setCountry(tournamentUpdateRequest.getCountry());
+            Tournament savedTournament = tournamentRepository.save(tournamentToUpdate);
+            return tournamentMapper.mapToTournamentResponseFromTournament(savedTournament);
         } else {
             throw new InvalidArgumentException("Tournament not found with id: " + tournamentId);
         }
