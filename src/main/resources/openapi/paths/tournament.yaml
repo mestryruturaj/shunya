@@ -77,3 +77,26 @@ tournamentById:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+
+  delete:
+    tags:
+      - Tournament
+    operationId: deleteTournamentById
+    summary: Delete a tournament by ID
+    description: >
+      Remove a tournament from the system using its unique identifier.
+    parameters:
+      - $ref: '../components.yaml#/parameters/tournamentId'
+    responses:
+      '200':
+        description: Tournament updated successfully
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/TournamentResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'

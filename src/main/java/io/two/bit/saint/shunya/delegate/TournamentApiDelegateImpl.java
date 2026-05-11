@@ -29,4 +29,9 @@ public class TournamentApiDelegateImpl implements TournamentApiDelegate {
     public ResponseEntity<TournamentResponse> updateTournamentById(Long tournamentId, TournamentUpdateRequest tournamentUpdateRequest) {
         return ResponseEntity.ok(tournamentService.updateTournament(tournamentId, tournamentUpdateRequest));
     }
+
+    @Override
+    public ResponseEntity<TournamentResponse> deleteTournamentById(Long tournamentId) {
+        return ResponseEntity.ok(tournamentService.deleteTournament(tournamentId));
+    }
 }

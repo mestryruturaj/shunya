@@ -10,4 +10,6 @@ public interface TournamentService {
     TournamentResponse getTournamentById(Long tournamentId);
 
     TournamentResponse updateTournament(Long tournamentId, TournamentUpdateRequest tournamentUpdateRequest);
+
+    TournamentResponse deleteTournament(Long tournamentId);
 }

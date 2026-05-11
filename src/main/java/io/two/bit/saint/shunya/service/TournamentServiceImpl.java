@@ -48,4 +48,16 @@ public class TournamentServiceImpl implements TournamentService {
             throw new InvalidArgumentException("Tournament not found with id: " + tournamentId);
         }
     }
+
+    @Override
+    public TournamentResponse deleteTournament(Long tournamentId) {
+        Optional<Tournament> tournamentOptional = tournamentRepository.findById(tournamentId);
+        if (tournamentOptional.isPresent()) {
+            Tournament tournamentToDelete = tournamentOptional.get();
+            tournamentRepository.delete(tournamentToDelete);
+            return tournamentMapper.mapToTournamentResponseFromTournament(tournamentToDelete);
+        } else {
+            throw new InvalidArgumentException("Tournament not found with id: " + tournamentId);
+        }
+    }
 }
