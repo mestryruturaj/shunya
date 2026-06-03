@@ -1,0 +1,9 @@
+season:
+  post:
+    tags:
+      - SeasonManagement
+    operationId: createSeason
+    summary: Create a new season
+    description: Create a new season with specified details
+
+    
