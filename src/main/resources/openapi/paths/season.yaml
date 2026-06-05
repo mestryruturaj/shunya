@@ -5,5 +5,23 @@ season:
     operationId: createSeason
     summary: Create a new season
     description: Create a new season with specified details
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../components.yaml#/components/schemas/SeasonCreateRequest'
+    responses:
+      '201':
+        description: Season created successfully
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/SeasonResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
 
-    
