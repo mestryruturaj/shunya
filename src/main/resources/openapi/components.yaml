@@ -468,12 +468,20 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/SeasonBase'
+        - type: object
+          properties:
+            tournamentId:
+              $ref: '#/properties/tournamentId'
 
     SeasonResponse:
       description: Response for actions on season details
       type: object
       allOf:
         - $ref: '#/components/schemas/SeasonBase'
+        - type: object
+          properties:
+            tournamentId:
+              $ref: '#/properties/tournamentId'
 
 
 
@@ -535,3 +543,8 @@ properties:
     type: string
     description: Name of the user who last updated the entity details
     example: "Admin User"
+  tournamentId:
+    type: integer
+    format: int64
+    description: Unique identifier of the tournament (must be a positive integer)
+    example: 123
