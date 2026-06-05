@@ -35,5 +35,5 @@ paths:
   /tournament/{tournament-id}:
     $ref: './paths/tournament.yaml#/tournamentById'
   /season:
-    $ref: './paths/season.yaml#/season''
+    $ref: './paths/season.yaml#/season'
 

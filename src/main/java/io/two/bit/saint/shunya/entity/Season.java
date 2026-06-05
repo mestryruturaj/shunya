@@ -1,6 +1,7 @@
 package io.two.bit.saint.shunya.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Season extends AbstractAuditEntity {
+    @Id
     private Long id;
     private String title;
     private String edition;

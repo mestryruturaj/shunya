@@ -380,8 +380,8 @@ components:
           $ref: '#/properties/updatedBy'
 
     # --- Season DTOs ---
-    SeasonCreateRequest:
-      description: Request payload for creating a new season
+    SeasonBase:
+      description: Base for season detail
       type: object
       properties:
         title:
@@ -462,6 +462,20 @@ components:
         - startDate
         - endDate
         - status
+
+    SeasonCreateRequest:
+      description: Request payload for creating a new season
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/SeasonBase'
+
+    SeasonResponse:
+      description: Response for actions on season details
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/SeasonBase'
+
+
 
     # --- Common schema ---
 
