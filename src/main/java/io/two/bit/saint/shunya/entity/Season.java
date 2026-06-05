@@ -1,7 +1,6 @@
 package io.two.bit.saint.shunya.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,8 +13,10 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "seasons")
 public class Season extends AbstractAuditEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String edition;
@@ -34,6 +35,10 @@ public class Season extends AbstractAuditEntity {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String status; //Scheduled, Ongoing, Completed
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tournament_id", nullable = false)
+    private Tournament tournament;
 }
 
 
