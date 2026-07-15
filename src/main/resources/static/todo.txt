@@ -1,6 +1,6 @@
 season
-    - create
-    - read
+    - create //TODO: Validation from enums created
+    - read //Done
     - update
     - delete
 
