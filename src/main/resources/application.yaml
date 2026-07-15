@@ -27,3 +27,18 @@ logging:
     # The %X{traceId} is the magic part.
     # It tells the logger: "Look into MDC, find the key 'traceId', and print it here."
     console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%X{traceId}] --- [%thread] %logger{12} : %msg%n"
+
+tournament:
+  season:
+    allowed-formats:
+      - T20
+      - ODI
+      - Test
+      - T10
+      - Local
+    allowed-ball-types:
+      - Leather
+      - Tennis (Heavy)
+      - Tennis (Light)
+      - Rubber
+      - Tape Ball

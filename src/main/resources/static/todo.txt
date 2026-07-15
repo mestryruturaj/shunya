@@ -1,0 +1,23 @@
+season
+    - create
+    - read
+    - update
+    - delete
+
+playerTournament
+    - create
+    - read
+    - update
+    - delete
+
+- auction
+    - create
+    - read
+    - update
+    - delete
+
+- business logic for conducting auction
+    - start auction
+    - end auction
+    - place bid
+    - determine winner

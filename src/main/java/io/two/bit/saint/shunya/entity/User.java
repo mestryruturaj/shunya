@@ -1,5 +1,6 @@
 package io.two.bit.saint.shunya.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -25,6 +26,7 @@ public class User {
     @Pattern(regexp = "^[0-9]{10}$", message = "Mobile number must be 10 digits")
     @NotBlank
     private String mobileNumber;
+    @JsonIgnore
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
             message = "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character")
     @NotBlank

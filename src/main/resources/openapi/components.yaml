@@ -379,6 +379,112 @@ components:
         updatedBy:
           $ref: '#/properties/updatedBy'
 
+    # --- Season DTOs ---
+    SeasonBase:
+      description: Base for season detail
+      type: object
+      properties:
+        title:
+          type: string
+          description: Name of the season
+          example: "IPL 2026"
+        edition:
+          type: string
+          description: Edition or year of the season
+          example: "Season 19"
+        description:
+          type: string
+          description: Detailed description of the season
+          example: "Indian Premier League Season 2026"
+        totalTeams:
+          type: integer
+          description: Total number of teams participating
+          example: 10
+        squadSize:
+          type: integer
+          description: Squad size for each team
+          example: 25
+        hasIconPlayer:
+          type: boolean
+          description: Whether the season features icon/marquee players
+          example: true
+        groundType:
+          type: string
+          description: Type of ground surface (TURF, GRASS)
+          example: "TURF"
+        bowlingType:
+          type: string
+          description: Type of bowling allowed (OVERARM, HALF_PITCH, UNDERARM)
+          example: "OVERARM"
+        overLimit:
+          type: integer
+          description: Over limit for the format
+          example: 20
+        formatType:
+          type: string
+          description: Cricket format type (T20, T10, FIFTY_OVERS)
+          example: "T20"
+        ballType:
+          type: string
+          description: Type of ball used (LEATHER, TENNIS)
+          example: "LEATHER"
+        ballColor:
+          type: string
+          description: Color of the ball (RED, WHITE, PINK)
+          example: "RED"
+        isDayNight:
+          type: boolean
+          description: Whether matches include day-night games
+          example: true
+        hasPowerPlay:
+          type: boolean
+          description: Whether powerplay restrictions apply
+          example: true
+        startDate:
+          type: string
+          format: date-time
+          description: Start date and time of the season
+          example: "2026-03-15T14:00:00Z"
+        endDate:
+          type: string
+          format: date-time
+          description: End date and time of the season
+          example: "2026-05-29T20:00:00Z"
+        status:
+          type: string
+          description: Current status of the season (SCHEDULED, ONGOING, COMPLETED)
+          example: "SCHEDULED"
+      required:
+        - title
+        - totalTeams
+        - squadSize
+        - formatType
+        - startDate
+        - endDate
+        - status
+
+    SeasonCreateRequest:
+      description: Request payload for creating a new season
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/SeasonBase'
+        - type: object
+          properties:
+            tournamentId:
+              $ref: '#/properties/tournamentId'
+
+    SeasonResponse:
+      description: Response for actions on season details
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/SeasonBase'
+        - type: object
+          properties:
+            tournamentId:
+              $ref: '#/properties/tournamentId'
+
+
+
     # --- Common schema ---
 
 
@@ -437,3 +543,8 @@ properties:
     type: string
     description: Name of the user who last updated the entity details
     example: "Admin User"
+  tournamentId:
+    type: integer
+    format: int64
+    description: Unique identifier of the tournament (must be a positive integer)
+    example: 123
