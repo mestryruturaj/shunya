@@ -25,3 +25,30 @@ season:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+seasonById:
+  get:
+    tags:
+      - SeasonManagement
+    operationId: getSeasonById
+    summary: Get season by Id
+    description: Retrieve a season's details by its unique identifier
+    parameters:
+      - name: season-id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    responses:
+      '200':
+        description: Season details retrieved successfully
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/SeasonResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
