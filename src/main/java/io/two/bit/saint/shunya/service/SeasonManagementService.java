@@ -6,4 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface SeasonManagementService {
     public SeasonResponse createSeason(SeasonCreateRequest seasonCreateRequest);
+
+    public SeasonResponse getSeasonById(Long seasonId);
 }

@@ -3,6 +3,7 @@ package io.two.bit.saint.shunya.service;
 import io.two.bit.saint.shunya.dao.SeasonManagementRepository;
 import io.two.bit.saint.shunya.entity.Season;
 import io.two.bit.saint.shunya.entity.Tournament;
+import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.SeasonMapper;
 import io.two.bit.saint.shunya.validator.SeasonManagementValidator;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,12 @@ public class SeasonManagementServiceImpl implements SeasonManagementService {
 
         Season savedSeason = seasonManagementRepository.save(season);
         return seasonMapper.mapToSeasonResponseFromSeasonEntity(savedSeason);
+    }
+
+    @Override
+    public SeasonResponse getSeasonById(Long seasonId) {
+        Season season = seasonManagementRepository.findById(seasonId)
+                .orElseThrow(() -> new InvalidArgumentException("Season with ID " + seasonId + " does not exist"));
+        return seasonMapper.mapToSeasonResponseFromSeasonEntity(season);
     }
 }
