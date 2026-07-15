@@ -18,4 +18,9 @@ public class SeasonManagementApiDelegateImpl implements SeasonManagementApiDeleg
     public ResponseEntity<SeasonResponse> createSeason(SeasonCreateRequest seasonCreateRequest) {
         return new ResponseEntity<>(seasonManagementService.createSeason(seasonCreateRequest), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<SeasonResponse> getSeasonById(Long id) {
+        return new ResponseEntity<>(seasonManagementService.getSeasonById(id), HttpStatus.OK);
+    }
 }
