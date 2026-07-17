@@ -454,6 +454,8 @@ components:
           type: string
           description: Current status of the season (SCHEDULED, ONGOING, COMPLETED)
           example: "SCHEDULED"
+        tournamentId:
+          $ref: '#/properties/tournamentId'
       required:
         - title
         - totalTeams
@@ -468,10 +470,12 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/SeasonBase'
-        - type: object
-          properties:
-            tournamentId:
-              $ref: '#/properties/tournamentId'
+
+    SeasonUpdateRequest:
+      description: Request payload for creating a new season
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/SeasonBase'
 
     SeasonResponse:
       description: Response for actions on season details
