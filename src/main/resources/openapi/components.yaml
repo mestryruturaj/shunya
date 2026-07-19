@@ -486,8 +486,8 @@ components:
           properties:
             tournamentId:
               $ref: '#/properties/tournamentId'
-
-
+            seasonId:
+              $ref: '#/properties/seasonId'
 
     # --- Common schema ---
 
@@ -548,6 +548,11 @@ properties:
     description: Name of the user who last updated the entity details
     example: "Admin User"
   tournamentId:
+    type: integer
+    format: int64
+    description: Unique identifier of the tournament (must be a positive integer)
+    example: 123
+  seasonId:
     type: integer
     format: int64
     description: Unique identifier of the tournament (must be a positive integer)
