@@ -9,6 +9,7 @@ import io.two.bit.saint.shunya.validator.SeasonManagementValidator;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.SeasonCreateRequest;
 import org.openapitools.model.SeasonResponse;
+import org.openapitools.model.SeasonUpdateRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,8 +21,8 @@ public class SeasonManagementServiceImpl implements SeasonManagementService {
 
     @Override
     public SeasonResponse createSeason(SeasonCreateRequest seasonCreateRequest) {
-        Tournament tournament = seasonManagementValidator.validateSeasonCreateRequest(seasonCreateRequest);
-        Season season = seasonMapper.mapToSeasonEntityFromSeasonCreateRequest(seasonCreateRequest);
+        Tournament tournament = seasonManagementValidator.validateSeasonRequest(seasonCreateRequest);
+        Season season = seasonMapper.mapToSeasonEntityFromSeasonBase(seasonCreateRequest);
         season.setTournament(tournament);
 
         Season savedSeason = seasonManagementRepository.save(season);
@@ -33,5 +34,19 @@ public class SeasonManagementServiceImpl implements SeasonManagementService {
         Season season = seasonManagementRepository.findById(seasonId)
                 .orElseThrow(() -> new InvalidArgumentException("Season with ID " + seasonId + " does not exist"));
         return seasonMapper.mapToSeasonResponseFromSeasonEntity(season);
+    }
+
+    @Override
+    public SeasonResponse updateSeasonById(Long seasonId, SeasonUpdateRequest seasonUpdateRequest) {
+        Season existingSeason = seasonManagementRepository.findById(seasonId)
+                .orElseThrow(() -> new InvalidArgumentException("Season with ID " + seasonId + " does not exist"));
+
+        Tournament tournament = seasonManagementValidator.validateSeasonRequest(seasonUpdateRequest);
+
+        Season updatedSeason = seasonMapper.mapToSeasonEntityFromSeasonBase(seasonUpdateRequest);
+        updatedSeason.setTournament(tournament);
+
+        Season savedSeason = seasonManagementRepository.save(updatedSeason);
+        return seasonMapper.mapToSeasonResponseFromSeasonEntity(savedSeason);
     }
 }

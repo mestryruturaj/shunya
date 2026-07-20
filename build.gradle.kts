@@ -63,6 +63,12 @@ openApiGenerate {
 	generatorName.set("spring")
 	inputSpec.set("$projectDir/src/main/resources/openapi/shunya-spec.yaml")
 	outputDir.set(layout.buildDirectory.dir("generated").get().asFile.absolutePath)
+
+	// Add the OpenAPI Normalizer configuration rule
+	openapiNormalizer.set(mapOf(
+		"REF_AS_PARENT_IN_ALLOF" to "true"
+	))
+
 	configOptions.set(mapOf(
 		"interfaceOnly" to "false",
 		"delegatePattern" to "true",
