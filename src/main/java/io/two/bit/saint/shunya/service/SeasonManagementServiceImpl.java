@@ -42,9 +42,9 @@ public class SeasonManagementServiceImpl implements SeasonManagementService {
                 .orElseThrow(() -> new InvalidArgumentException("Season with ID " + seasonId + " does not exist"));
 
         Tournament tournament = seasonManagementValidator.validateSeasonRequest(seasonUpdateRequest);
-        existingSeason.setTournament(tournament);
 
         Season updatedSeason = seasonMapper.mapToSeasonEntityFromSeasonBase(seasonUpdateRequest);
+        updatedSeason.setTournament(tournament);
 
         Season savedSeason = seasonManagementRepository.save(updatedSeason);
         return seasonMapper.mapToSeasonResponseFromSeasonEntity(savedSeason);
