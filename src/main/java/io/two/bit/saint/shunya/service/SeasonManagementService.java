@@ -11,4 +11,6 @@ public interface SeasonManagementService {
     public SeasonResponse getSeasonById(Long seasonId);
 
     public SeasonResponse updateSeasonById(Long seasonId, SeasonUpdateRequest seasonUpdateRequest);
+
+    public SeasonResponse deleteSeasonById(Long seasonId);
 }

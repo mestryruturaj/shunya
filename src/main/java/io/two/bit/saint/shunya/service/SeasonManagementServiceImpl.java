@@ -50,4 +50,13 @@ public class SeasonManagementServiceImpl implements SeasonManagementService {
         return seasonMapper.mapToSeasonResponseFromSeasonEntity(savedSeason);
     }
 
+    @Override
+    public SeasonResponse deleteSeasonById(Long seasonId) {
+        Season existingSeason = seasonRepository.findById(seasonId)
+                .orElseThrow(() -> new InvalidArgumentException("Season with ID " + seasonId + " does not exist"));
+
+        seasonRepository.deleteById(seasonId);
+
+        return seasonMapper.mapToSeasonResponseFromSeasonEntity(existingSeason);
+    }
 }
