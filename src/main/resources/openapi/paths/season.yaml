@@ -75,6 +75,27 @@ seasonById:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+  delete:
+    tags:
+      - SeasonManagement
+    operationId: deleteSeasonById
+    summary: Delete season by Id
+    description: Delete a season by its unique identifier
+    parameters:
+      - $ref: '#/components/parameters/season-id'
+    responses:
+      '200':
+        description: Season deleted successfully
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/SeasonResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
 
 components:
   parameters:
