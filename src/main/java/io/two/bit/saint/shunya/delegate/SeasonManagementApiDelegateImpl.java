@@ -30,4 +30,9 @@ public class SeasonManagementApiDelegateImpl implements SeasonManagementApiDeleg
                                                            SeasonUpdateRequest seasonUpdateRequest) {
         return new ResponseEntity<>(seasonManagementService.updateSeasonById(seasonId, seasonUpdateRequest), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<SeasonResponse> deleteSeasonById(Long seasonId) {
+        return new ResponseEntity<>(seasonManagementService.deleteSeasonById(seasonId), HttpStatus.OK);
+    }
 }

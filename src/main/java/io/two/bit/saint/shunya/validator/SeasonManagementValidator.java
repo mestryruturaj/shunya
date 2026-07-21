@@ -1,12 +1,11 @@
 package io.two.bit.saint.shunya.validator;
 
-import io.two.bit.saint.shunya.dao.SeasonManagementRepository;
+import io.two.bit.saint.shunya.dao.SeasonRepository;
 import io.two.bit.saint.shunya.dao.TournamentRepository;
 import io.two.bit.saint.shunya.entity.Tournament;
 import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.SeasonBase;
-import org.openapitools.model.SeasonCreateRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -14,7 +13,7 @@ import java.util.Objects;
 @Component
 @RequiredArgsConstructor
 public class SeasonManagementValidator {
-    private final SeasonManagementRepository seasonManagementRepository;
+    private final SeasonRepository seasonRepository;
     private final TournamentRepository tournamentRepository;
 
     public Tournament validateSeasonRequest(SeasonBase seasonRequest) {

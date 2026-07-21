@@ -2,7 +2,7 @@ season
     - create //TODO: Validation from enums created
     - read //Done
     - update //Done
-    - delete
+    - delete //Done
 
 playerTournament
     - create
