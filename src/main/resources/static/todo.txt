@@ -4,11 +4,12 @@ season
     - update //Done
     - delete //Done
 
-playerTournament
-    - create
+TournamentPlayer
+    - create //Done
     - read
     - update
     - delete
+    - create (tournamentId, Player request)
 
 - auction
     - create
