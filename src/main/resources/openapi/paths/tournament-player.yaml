@@ -1,0 +1,62 @@
+tournamentPlayer:
+  post:
+    tags:
+      - TournamentPlayerManagement
+    operationId: createTournamentPlayer
+    summary: Create a new tournament player
+    description: >
+      This endpoint allows you to create a new tournament player by providing the necessary details in the request
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TournamentPlayerCreateRequest'
+    responses:
+      '201':
+        description: Season details updated successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TournamentPlayerResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
+
+components:
+  schemas:
+    TournamentPlayerBase:
+      type: object
+      properties:
+        tournamentId:
+          type: integer
+          format: int64
+          description: The unique identifier of the tournament
+        playerId:
+          type: integer
+          format: int64
+          description: The unique identifier of the player
+      required:
+        - tournamentId
+        - playerId
+
+    TournamentPlayerCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/TournamentPlayerBase'
+        - type: object
+
+    TournamentPlayerResponse:
+      type: object
+      properties:
+        tournamentPlayerId:
+          type: integer
+          format: int64
+          description: The unique identifier of the tournament player
+        tournament:
+            $ref: '../components.yaml#/components/schemas/TournamentResponse'
+        player:
+            $ref: '../components.yaml#/components/schemas/PlayerDto'

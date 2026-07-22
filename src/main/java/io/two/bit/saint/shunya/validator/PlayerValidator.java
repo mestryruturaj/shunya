@@ -2,6 +2,7 @@ package io.two.bit.saint.shunya.validator;
 
 import io.two.bit.saint.shunya.dao.PlayerRepository;
 import io.two.bit.saint.shunya.dao.UserRepository;
+import io.two.bit.saint.shunya.entity.Player;
 import io.two.bit.saint.shunya.entity.User;
 import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import org.openapitools.model.PlayerCreateRequest;
@@ -36,6 +37,11 @@ public class PlayerValidator {
         if (!playerRepository.existsById(playerId)) {
             throw new InvalidArgumentException("Player with id " + playerId + " does not exist");
         }
+    }
+
+    public Player validateAndFetchPlayer(Long playerId) {
+        return playerRepository.findById(playerId)
+                .orElseThrow(() -> new InvalidArgumentException("Player not found with ID: " + playerId));
     }
 
 }
