@@ -78,7 +78,11 @@ openApiGenerate {
 		"useTags" to "true",
 		"ResponseEntity" to "true",
 		"dateLibrary" to "java8",
+		"jackson" to "true",
+		"withXml" to "false",
+		"performBeanValidation" to "true"
 	))
+
 	// GLOBAL TYPE MAPPING
 	// This tells the generator to use 'LocalDateTime' instead of the default 'OffsetDateTime'
 	typeMappings.set(mapOf(
