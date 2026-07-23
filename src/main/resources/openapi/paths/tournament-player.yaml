@@ -14,7 +14,7 @@ tournamentPlayer:
             $ref: '#/components/schemas/TournamentPlayerCreateRequest'
     responses:
       '201':
-        description: Season details updated successfully
+        description: Tournament Player created successfully
         content:
           application/json:
             schema:
@@ -26,6 +26,32 @@ tournamentPlayer:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+tournamentPlayerById:
+  get:
+    tags:
+      - TournamentPlayerManagement
+    operationId: getTournamentPlayerById
+    summary: Get tournament player details by ID
+    parameters:
+      - name: tournament-player-id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    responses:
+      '200':
+        description: Tournament Player fetched successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TournamentPlayerResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
 
 components:
   schemas:

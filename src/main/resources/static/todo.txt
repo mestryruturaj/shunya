@@ -6,7 +6,8 @@ season
 
 TournamentPlayer
     - create //Done
-    - read
+    - read //Done
+    - read all players of a tournament
     - update
     - delete
     - create (tournamentId, Player request)
