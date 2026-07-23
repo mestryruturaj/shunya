@@ -3,6 +3,7 @@ package io.two.bit.saint.shunya.service;
 import io.two.bit.saint.shunya.dao.TournamentPlayerRepository;
 import io.two.bit.saint.shunya.dto.TournamentPlayerValidContext;
 import io.two.bit.saint.shunya.entity.TournamentPlayer;
+import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.PlayerMapper;
 import io.two.bit.saint.shunya.mapper.TournamentMapper;
 import io.two.bit.saint.shunya.mapper.TournamentPlayerMapper;
@@ -45,5 +46,13 @@ public class TournamentPlayerManagementServiceImpl implements TournamentPlayerMa
         tournamentPlayerResponse.setTournament(tournamentResponse);
         tournamentPlayerResponse.setPlayer(playerDto);
         return tournamentPlayerResponse;
+    }
+
+    @Override
+    public TournamentPlayerResponse getTournamentPlayersByTournamentId(Long tournamentPlayerId) {
+        TournamentPlayer validTournamentPlayer = tournamentPlayerRepository.findById(tournamentPlayerId)
+                .orElseThrow(() -> new InvalidArgumentException("Tournament player not found with id: " + tournamentPlayerId));
+
+        return buildTournamentPlayerResponse(validTournamentPlayer);
     }
 }
