@@ -13,10 +13,18 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TournamentPlayerManagementApiDelegateImpl implements TournamentPlayerManagementApiDelegate {
     private final TournamentPlayerManagementService tournamentPlayerManagementService;
+
     @Override
     public ResponseEntity<TournamentPlayerResponse> createTournamentPlayer(TournamentPlayerCreateRequest tournamentPlayerCreateRequest) {
         return new ResponseEntity<>(
                 tournamentPlayerManagementService.createTournamentPlayer(tournamentPlayerCreateRequest),
                 HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<TournamentPlayerResponse> getTournamentPlayerById(Long tournamentPlayerId) {
+        return new ResponseEntity<>(
+                tournamentPlayerManagementService.getTournamentPlayersByTournamentId(tournamentPlayerId),
+                HttpStatus.OK);
     }
 }
