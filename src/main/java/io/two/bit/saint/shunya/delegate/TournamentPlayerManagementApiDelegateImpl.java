@@ -5,9 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.openapitools.api.TournamentPlayerManagementApiDelegate;
 import org.openapitools.model.TournamentPlayerCreateRequest;
 import org.openapitools.model.TournamentPlayerResponse;
+import org.openapitools.model.TournamentPlayersResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -24,7 +27,14 @@ public class TournamentPlayerManagementApiDelegateImpl implements TournamentPlay
     @Override
     public ResponseEntity<TournamentPlayerResponse> getTournamentPlayerById(Long tournamentPlayerId) {
         return new ResponseEntity<>(
-                tournamentPlayerManagementService.getTournamentPlayersByTournamentId(tournamentPlayerId),
+                tournamentPlayerManagementService.getTournamentPlayerById(tournamentPlayerId),
+                HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<TournamentPlayersResponse> getTournamentPlayersByTournamentId(Long tournamentId) {
+        return new ResponseEntity<>(
+                tournamentPlayerManagementService.getTournamentPlayersByTournamentId(tournamentId),
                 HttpStatus.OK);
     }
 }
