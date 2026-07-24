@@ -53,6 +53,10 @@ dependencies {
 	// 6. Testing
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+	//7. String and collection utils
+	implementation("org.apache.commons:commons-lang3:3.17.0")
+	implementation("org.apache.commons:commons-collections4:4.4")
 }
 
 tasks.withType<Test> {

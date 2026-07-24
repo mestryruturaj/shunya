@@ -53,6 +53,33 @@ tournamentPlayerById:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+tournamentPlayersByTournamentId:
+  get:
+    tags:
+      - TournamentPlayerManagement
+    operationId: getTournamentPlayersByTournamentId
+    summary: Get all tournament players for a specific tournament
+    parameters:
+      - name: tournament-id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    responses:
+      '200':
+        description: Tournament Players fetched successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TournamentPlayersResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
 components:
   schemas:
     TournamentPlayerBase:
@@ -85,4 +112,14 @@ components:
         tournament:
             $ref: '../components.yaml#/components/schemas/TournamentResponse'
         player:
+            $ref: '../components.yaml#/components/schemas/PlayerDto'
+
+    TournamentPlayersResponse:
+      type: object
+      properties:
+        tournament:
+          $ref: '../components.yaml#/components/schemas/TournamentResponse'
+        players:
+          type: array
+          items:
             $ref: '../components.yaml#/components/schemas/PlayerDto'
