@@ -37,4 +37,11 @@ public class TournamentPlayerManagementApiDelegateImpl implements TournamentPlay
                 tournamentPlayerManagementService.getTournamentPlayersByTournamentId(tournamentId),
                 HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<TournamentPlayerResponse> deleteTournamentPlayerById(Long tournamentPlayerId) {
+        return new ResponseEntity<>(
+                tournamentPlayerManagementService.deleteTournamentPlayerById(tournamentPlayerId),
+                HttpStatus.OK);
+    }
 }
