@@ -52,6 +52,32 @@ tournamentPlayerById:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+  delete:
+    tags:
+      - TournamentPlayerManagement
+    operationId: deleteTournamentPlayerById
+    summary: Get tournament player details by ID
+    parameters:
+      - name: tournament-player-id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    responses:
+      '200':
+        description: Tournament Player deleted successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TournamentPlayerResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
 
 tournamentPlayersByTournamentId:
   get:

@@ -8,9 +8,7 @@ TournamentPlayer
     - create //Done
     - read //Done
     - read all players of a tournament //Done
-    - update
-    - delete
-    - create (tournamentId, Player request)
+    - delete (hard delete) //done
 
 - auction
     - create

@@ -10,4 +10,6 @@ public interface TournamentPlayerManagementService {
     TournamentPlayerResponse getTournamentPlayerById(Long tournamentPlayerId);
 
     TournamentPlayersResponse getTournamentPlayersByTournamentId(Long tournamentId);
+
+    TournamentPlayerResponse deleteTournamentPlayerById(Long tournamentPlayerId);
 }

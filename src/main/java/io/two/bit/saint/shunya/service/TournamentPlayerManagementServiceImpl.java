@@ -77,4 +77,14 @@ public class TournamentPlayerManagementServiceImpl implements TournamentPlayerMa
                 .toList());
         return tournamentPlayersResponse;
     }
+
+    @Override
+    public TournamentPlayerResponse deleteTournamentPlayerById(Long tournamentPlayerId) {
+        TournamentPlayer validTournamentPlayer = tournamentPlayerRepository.findById(tournamentPlayerId)
+                .orElseThrow(() -> new InvalidArgumentException("Tournament player not found with id: " + tournamentPlayerId));
+
+        tournamentPlayerRepository.delete(validTournamentPlayer);
+
+        return buildTournamentPlayerResponse(validTournamentPlayer);
+    }
 }
