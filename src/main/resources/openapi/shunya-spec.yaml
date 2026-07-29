@@ -48,3 +48,5 @@ paths:
     $ref: './paths/season-player.yaml#/seasonPlayer'
   /season-player/{season-player-id}:
     $ref: './paths/season-player.yaml#/seasonPlayerById'
+  /season-player/season/{season-id}/player:
+    $ref: './paths/season-player.yaml#/seasonPlayersBySeasonId'
