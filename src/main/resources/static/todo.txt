@@ -10,6 +10,18 @@ TournamentPlayer
     - read all players of a tournament //Done
     - delete (hard delete) //done
 
+SeasonPlayer
+    - create //done
+    - read
+    - read all players of a season
+    - delete (hard delete)
+
+SeasonTeam
+    - create
+    - read a team
+    - read all teams of a season
+    - delete (hard delete)
+
 - auction
     - create
     - read
