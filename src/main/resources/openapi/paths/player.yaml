@@ -137,3 +137,10 @@ playerById:
               $ref: '../components.yaml#/components/schemas/ErrorDto'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+
+
+components:
+  schemas:
+    PlayerInfo:
+      allOf:
+      - $ref: '../components.yaml#/components/schemas/PlayerDto'

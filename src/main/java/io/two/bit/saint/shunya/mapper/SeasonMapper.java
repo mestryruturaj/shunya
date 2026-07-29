@@ -5,6 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.openapitools.model.SeasonBase;
+import org.openapitools.model.SeasonInfo;
 import org.openapitools.model.SeasonResponse;
 
 @Mapper(componentModel = "spring",
@@ -16,4 +17,8 @@ public interface SeasonMapper {
     @Mapping(target = "tournamentId", source = "tournament.id")
     @Mapping(target = "seasonId", source = "id")
     public SeasonResponse mapToSeasonResponseFromSeasonEntity(Season season);
+
+    @Mapping(target = "tournamentId", source = "tournament.id")
+    @Mapping(target = "seasonId", source = "id")
+    public SeasonInfo mapToSeasonInfoFromSeasonEntity(Season season);
 }

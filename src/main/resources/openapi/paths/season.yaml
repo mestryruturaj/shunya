@@ -106,3 +106,8 @@ components:
       schema:
         type: integer
         format: int64
+
+  schemas:
+    SeasonInfo:
+      allOf:
+        - $ref: '../components.yaml#/components/schemas/SeasonResponse'

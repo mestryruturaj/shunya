@@ -3,6 +3,7 @@ package io.two.bit.saint.shunya.exception;
 import org.openapitools.model.ErrorDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -16,13 +17,13 @@ public class GlobalExceptionHandler {
     /**
      * Handle InvalidArgumentException and return 400 Bad Request
      *
-     * @param ex the InvalidArgumentException
+     * @param ex      the InvalidArgumentException
      * @param request the web request
      * @return ResponseEntity with ErrorDto and 400 status
      */
-    @ExceptionHandler(InvalidArgumentException.class)
-    public ResponseEntity<ErrorDto> handleInvalidArgumentException(
-            InvalidArgumentException ex,
+    @ExceptionHandler({InvalidArgumentException.class, MethodArgumentNotValidException.class})
+    public ResponseEntity<ErrorDto> handleValidationExceptions(
+            Exception ex,
             WebRequest request) {
 
         ErrorDto errorDto = new ErrorDto();
@@ -36,7 +37,7 @@ public class GlobalExceptionHandler {
     /**
      * Handle generic Exception and return 500 Internal Server Error
      *
-     * @param ex the exception
+     * @param ex      the exception
      * @param request the web request
      * @return ResponseEntity with ErrorDto and 500 status
      */
