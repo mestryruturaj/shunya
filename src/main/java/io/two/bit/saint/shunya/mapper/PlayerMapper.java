@@ -7,6 +7,7 @@ import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.openapitools.model.PlayerCreateRequest;
 import org.openapitools.model.PlayerDto;
+import org.openapitools.model.PlayerInfo;
 import org.openapitools.model.PlayerUpdateRequest;
 
 import java.net.URI;
@@ -27,4 +28,6 @@ public interface PlayerMapper {
 
     @Mapping(target = "profileImageUrl", source = "profileImageUrl", qualifiedByName = "mapImageUriToString")
     public Player mapToPlayerEntityFromPlayerUpdateRequest(PlayerUpdateRequest playerUpdateRequest);
+
+    public PlayerInfo mapToPlayerInfoFromPlayerEntity(Player player);
 }
