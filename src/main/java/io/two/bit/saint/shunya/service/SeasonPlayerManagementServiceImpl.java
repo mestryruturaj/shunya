@@ -4,6 +4,7 @@ import io.two.bit.saint.shunya.dao.SeasonPlayerRepository;
 import io.two.bit.saint.shunya.dto.SeasonPlayerValidContext;
 import io.two.bit.saint.shunya.dto.enums.RequestType;
 import io.two.bit.saint.shunya.entity.SeasonPlayer;
+import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.PlayerMapper;
 import io.two.bit.saint.shunya.mapper.SeasonMapper;
 import io.two.bit.saint.shunya.validator.SeasonPlayerValidator;
@@ -30,11 +31,24 @@ public class SeasonPlayerManagementServiceImpl implements SeasonPlayerManagement
                 .build();
         SeasonPlayer savedSeasonPlayer = seasonPlayerRepository.save(unsavedSeasonPlayer);
 
-        SeasonPlayerResponse seasonPlayerResponse = new SeasonPlayerResponse();
-        seasonPlayerResponse.setSeason(seasonMapper.mapToSeasonInfoFromSeasonEntity(savedSeasonPlayer.getSeason()));
-        seasonPlayerResponse.setPlayer(playerMapper.mapToPlayerInfoFromPlayerEntity(savedSeasonPlayer.getPlayer()));
-        seasonPlayerResponse.setId(savedSeasonPlayer.getId());
+        return buildSeasonPlayerResponse(savedSeasonPlayer);
+    }
 
+    private SeasonPlayerResponse buildSeasonPlayerResponse(SeasonPlayer seasonPlayer) {
+        SeasonPlayerResponse seasonPlayerResponse = new SeasonPlayerResponse();
+        seasonPlayerResponse.setSeason(seasonMapper.mapToSeasonInfoFromSeasonEntity(seasonPlayer.getSeason()));
+        seasonPlayerResponse.setPlayer(playerMapper.mapToPlayerInfoFromPlayerEntity(seasonPlayer.getPlayer()));
+        seasonPlayerResponse.setId(seasonPlayer.getId());
         return seasonPlayerResponse;
+    }
+
+    @Override
+    public SeasonPlayerResponse getSeasonPlayerById(Long seasonPlayerId) {
+        seasonPlayerValidator.validateIdField(seasonPlayerId, "Season Player");
+
+        SeasonPlayer fetchedSeasonPlayer = seasonPlayerRepository.findById(seasonPlayerId)
+                .orElseThrow(() -> new InvalidArgumentException("Season player not found with id: " + seasonPlayerId));
+
+        return buildSeasonPlayerResponse(fetchedSeasonPlayer);
     }
 }

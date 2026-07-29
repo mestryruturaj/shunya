@@ -5,4 +5,6 @@ import org.openapitools.model.SeasonPlayerResponse;
 
 public interface SeasonPlayerManagementService {
     SeasonPlayerResponse createSeasonPlayer(SeasonPlayerCreateRequest seasonPlayerCreateRequest);
+
+    SeasonPlayerResponse getSeasonPlayerById(Long seasonPlayerId);
 }
