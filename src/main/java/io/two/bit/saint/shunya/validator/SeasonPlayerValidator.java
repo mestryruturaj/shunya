@@ -7,14 +7,10 @@ import io.two.bit.saint.shunya.dto.SeasonPlayerValidContext;
 import io.two.bit.saint.shunya.dto.enums.RequestType;
 import io.two.bit.saint.shunya.entity.Player;
 import io.two.bit.saint.shunya.entity.Season;
-import io.two.bit.saint.shunya.entity.SeasonPlayer;
 import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.SeasonPlayerBase;
-import org.openapitools.model.SeasonPlayerResponse;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -26,8 +22,8 @@ public class SeasonPlayerValidator extends BaseValidator {
     public SeasonPlayerValidContext validateSeasonPlayer(SeasonPlayerBase seasonPlayerRequest, RequestType requestType) {
         Long seasonId = seasonPlayerRequest.getSeasonId();
         Long playerId = seasonPlayerRequest.getPlayerId();
-        validateIdField(seasonId, "Season");
-        validateIdField(playerId, "Player");
+        validateIdField(seasonId, Season.class.getSimpleName());
+        validateIdField(playerId, Player.class.getSimpleName());
 
         Season season = seasonRepository.findById(seasonId)
                 .orElseThrow(() -> new InvalidArgumentException("Season not found with id: " + seasonId));

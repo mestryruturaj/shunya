@@ -2,6 +2,7 @@ package io.two.bit.saint.shunya.validator;
 
 import io.two.bit.saint.shunya.dao.SeasonRepository;
 import io.two.bit.saint.shunya.dao.TournamentRepository;
+import io.two.bit.saint.shunya.entity.Season;
 import io.two.bit.saint.shunya.entity.Tournament;
 import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
-public class SeasonManagementValidator {
+public class SeasonValidator extends BaseValidator {
     private final SeasonRepository seasonRepository;
     private final TournamentRepository tournamentRepository;
 
@@ -23,5 +24,4 @@ public class SeasonManagementValidator {
         return tournamentRepository.findById(seasonRequest.getTournamentId())
                 .orElseThrow(() -> new InvalidArgumentException("Tournament with ID " + seasonRequest.getTournamentId() + " does not exist"));
     }
-
 }
