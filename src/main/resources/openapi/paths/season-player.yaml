@@ -51,6 +51,35 @@ seasonPlayerById:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+seasonPlayersBySeasonId:
+  get:
+    tags:
+      - SeasonPlayerManagement
+    operationId: getSeasonPlayersBySeasonId
+    summary: Get season players by seasonId
+    parameters:
+      - name: season-id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    responses:
+      '200':
+        description: Tournament Players fetched successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonPlayersResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
+
+
 components:
   schemas:
     SeasonPlayerBase:
@@ -81,5 +110,11 @@ components:
         player:
           $ref: './player.yaml#/components/schemas/PlayerInfo'
 
-
-
+    SeasonPlayersResponse:
+      properties:
+        season:
+          $ref: './season.yaml#/components/schemas/SeasonInfo'
+        players:
+          type: array
+          items:
+            $ref: './player.yaml#/components/schemas/PlayerInfo'

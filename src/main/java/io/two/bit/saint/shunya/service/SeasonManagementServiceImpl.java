@@ -5,7 +5,7 @@ import io.two.bit.saint.shunya.entity.Season;
 import io.two.bit.saint.shunya.entity.Tournament;
 import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.SeasonMapper;
-import io.two.bit.saint.shunya.validator.SeasonManagementValidator;
+import io.two.bit.saint.shunya.validator.SeasonValidator;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.SeasonCreateRequest;
 import org.openapitools.model.SeasonResponse;
@@ -15,13 +15,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SeasonManagementServiceImpl implements SeasonManagementService {
-    private final SeasonManagementValidator seasonManagementValidator;
+    private final SeasonValidator seasonValidator;
     private final SeasonRepository seasonRepository;
     private final SeasonMapper seasonMapper;
 
     @Override
     public SeasonResponse createSeason(SeasonCreateRequest seasonCreateRequest) {
-        Tournament tournament = seasonManagementValidator.validateSeasonRequest(seasonCreateRequest);
+        Tournament tournament = seasonValidator.validateSeasonRequest(seasonCreateRequest);
         Season season = seasonMapper.mapToSeasonEntityFromSeasonBase(seasonCreateRequest);
         season.setTournament(tournament);
 
@@ -41,7 +41,7 @@ public class SeasonManagementServiceImpl implements SeasonManagementService {
         seasonRepository.findById(seasonId)
                 .orElseThrow(() -> new InvalidArgumentException("Season with ID " + seasonId + " does not exist"));
 
-        Tournament tournament = seasonManagementValidator.validateSeasonRequest(seasonUpdateRequest);
+        Tournament tournament = seasonValidator.validateSeasonRequest(seasonUpdateRequest);
 
         Season updatedSeason = seasonMapper.mapToSeasonEntityFromSeasonBase(seasonUpdateRequest);
         updatedSeason.setTournament(tournament);
@@ -58,5 +58,13 @@ public class SeasonManagementServiceImpl implements SeasonManagementService {
         seasonRepository.deleteById(seasonId);
 
         return seasonMapper.mapToSeasonResponseFromSeasonEntity(existingSeason);
+    }
+
+    @Override
+    public Season fetchById(Long seasonId) {
+        seasonValidator.validateIdField(seasonId, Season.class.getSimpleName());
+
+        return seasonRepository.findById(seasonId)
+                .orElseThrow(() -> new InvalidArgumentException("Season not found with id: " + seasonId));
     }
 }

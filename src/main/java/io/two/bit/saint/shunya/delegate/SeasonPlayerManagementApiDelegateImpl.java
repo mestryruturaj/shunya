@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.openapitools.api.SeasonPlayerManagementApiDelegate;
 import org.openapitools.model.SeasonPlayerCreateRequest;
 import org.openapitools.model.SeasonPlayerResponse;
+import org.openapitools.model.SeasonPlayersResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,10 @@ public class SeasonPlayerManagementApiDelegateImpl implements SeasonPlayerManage
     @Override
     public ResponseEntity<SeasonPlayerResponse> getSeasonPlayerById(Long seasonPlayerId) {
         return new ResponseEntity<>(seasonPlayerManagementService.getSeasonPlayerById(seasonPlayerId), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<SeasonPlayersResponse> getSeasonPlayersBySeasonId(Long seasonId) {
+        return new ResponseEntity<>(seasonPlayerManagementService.getSeasonPlayersBySeasonId(seasonId), HttpStatus.OK);
     }
 }
