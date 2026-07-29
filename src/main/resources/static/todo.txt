@@ -12,8 +12,14 @@ TournamentPlayer
 
 SeasonPlayer
     - create //done
-    - read
+    - read //done
     - read all players of a season
+    - delete (hard delete)
+
+Team
+    - create
+    - read a team
+    - read all teams
     - delete (hard delete)
 
 SeasonTeam
