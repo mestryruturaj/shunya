@@ -10,4 +10,6 @@ public interface SeasonPlayerManagementService {
     SeasonPlayerResponse getSeasonPlayerById(Long seasonPlayerId);
 
     SeasonPlayersResponse getSeasonPlayersBySeasonId(Long seasonId);
+
+    SeasonPlayerResponse deleteSeasonPlayerById(Long seasonPlayerId);
 }

@@ -74,4 +74,17 @@ public class SeasonPlayerManagementServiceImpl implements SeasonPlayerManagement
                 .toList());
         return seasonPlayersResponse;
     }
+
+    @Override
+    public SeasonPlayerResponse deleteSeasonPlayerById(Long seasonPlayerId) {
+        SeasonPlayer fetchedSeasonPlayer = fetchById(seasonPlayerId);
+        seasonPlayerRepository.delete(fetchedSeasonPlayer);
+        return buildSeasonPlayerResponse(fetchedSeasonPlayer);
+    }
+
+    public SeasonPlayer fetchById(Long seasonPlayerId) {
+        seasonPlayerValidator.validateIdField(seasonPlayerId, SeasonPlayer.class.getSimpleName());
+        return seasonPlayerRepository.findById(seasonPlayerId)
+                .orElseThrow(() -> new InvalidArgumentException("SeasonPlayer with Id " + seasonPlayerId + " does not exist."));
+    }
 }
