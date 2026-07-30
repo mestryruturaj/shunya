@@ -29,4 +29,9 @@ public class SeasonPlayerManagementApiDelegateImpl implements SeasonPlayerManage
     public ResponseEntity<SeasonPlayersResponse> getSeasonPlayersBySeasonId(Long seasonId) {
         return new ResponseEntity<>(seasonPlayerManagementService.getSeasonPlayersBySeasonId(seasonId), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<SeasonPlayerResponse> deleteSeasonPlayerById(Long seasonPlayerId) {
+        return new ResponseEntity<>(seasonPlayerManagementService.deleteSeasonPlayerById(seasonPlayerId), HttpStatus.OK);
+    }
 }
