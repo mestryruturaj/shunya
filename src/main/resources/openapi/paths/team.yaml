@@ -31,17 +31,28 @@ components:
         teamName:
           type: string
           example: "Warriors"
+        captain:
+          type: integer
+          format: int64
+        viceCaptain:
+          type: integer
+          format: int64
 
     TeamCreateRequest:
       allOf:
         - $ref: '#/components/schemas/TeamBase'
 
     TeamResponse:
-      allOf:
-        - $ref: '#/components/schemas/TeamBase'
-        - type: object
-          properties:
-            id:
-              type: integer
-              format: int64
-              example: 1
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        teamName:
+          type: string
+          example: "Warriors"
+        captain:
+          $ref: './player.yaml#/components/schemas/PlayerInfo'
+        viceCaptain:
+          $ref: './player.yaml#/components/schemas/PlayerInfo'
