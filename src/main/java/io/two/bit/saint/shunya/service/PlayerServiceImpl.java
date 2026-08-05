@@ -64,4 +64,9 @@ public class PlayerServiceImpl implements PlayerService {
         Player player = playerOptional.orElseThrow(() -> new InvalidArgumentException("Player with id " + playerId + " does not exist"));
         return playerMapper.mapToPlayerDtoFromPlayerEntity(player);
     }
+
+    public Player fetchPlayerById(Long playerId) {
+        return playerRepository.findById(playerId)
+                .orElseThrow(() -> new InvalidArgumentException("Player not found with ID: " + playerId));
+    }
 }
