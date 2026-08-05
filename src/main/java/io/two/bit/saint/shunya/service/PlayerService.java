@@ -1,5 +1,6 @@
 package io.two.bit.saint.shunya.service;
 
+import io.two.bit.saint.shunya.entity.Player;
 import org.openapitools.model.PlayerCreateRequest;
 import org.openapitools.model.PlayerDto;
 import org.openapitools.model.PlayerUpdateRequest;
@@ -28,4 +29,6 @@ public interface PlayerService {
     default PlayerDto deletePlayer(Long playerId) {
         return null;
     }
+
+    Player fetchPlayerById(Long playerId);
 }
