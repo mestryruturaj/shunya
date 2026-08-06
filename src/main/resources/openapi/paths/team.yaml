@@ -23,6 +23,26 @@ team:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+  get:
+    tags:
+      - TeamManagement
+    operationId: getAllTeams
+    responses:
+      '200':
+        description: List of all teams retrieved successfully
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TeamResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
 teamById:
   get:
     tags:
