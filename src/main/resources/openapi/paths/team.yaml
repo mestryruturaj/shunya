@@ -63,7 +63,31 @@ teamById:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
-
+  put:
+    tags:
+      - TeamManagement
+    operationId: updateTeamById
+    parameters:
+      - $ref: '#/components/parameters/teamId'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TeamUpdateRequest'
+    responses:
+      '200':
+        description: Team updated successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamResponse'
+      '400':
+          $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+          $ref: '../components.yaml#/components/responses/InternalServerError'
 
 components:
   schemas:
@@ -81,6 +105,10 @@ components:
           format: int64
 
     TeamCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/TeamBase'
+
+    TeamUpdateRequest:
       allOf:
         - $ref: '#/components/schemas/TeamBase'
 

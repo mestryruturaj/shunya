@@ -14,6 +14,7 @@ SeasonPlayer
     - create //done
     - read //done
     - read all players of a season //done
+    - update team //done
     - delete (hard delete) //done
 
 Team

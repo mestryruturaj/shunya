@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.openapitools.api.TeamManagementApiDelegate;
 import org.openapitools.model.TeamCreateRequest;
 import org.openapitools.model.TeamResponse;
+import org.openapitools.model.TeamUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -30,5 +31,10 @@ public class TeamManagementApiDelegateImpl implements TeamManagementApiDelegate 
     @Override
     public ResponseEntity<List<TeamResponse>> getAllTeams() {
         return new ResponseEntity<>(teamManagementService.getAllTeams(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<TeamResponse> updateTeamById(Long teamId, TeamUpdateRequest teamUpdateRequest) {
+        return new ResponseEntity<>(teamManagementService.updateTeamById(teamId, teamUpdateRequest), HttpStatus.OK);
     }
 }
