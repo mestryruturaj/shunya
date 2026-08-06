@@ -9,6 +9,7 @@ import io.two.bit.saint.shunya.validator.TeamValidator;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.TeamCreateRequest;
 import org.openapitools.model.TeamResponse;
+import org.openapitools.model.TeamUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +21,11 @@ public class TeamManagementServiceImpl implements TeamManagementService {
     private final TeamValidator teamValidator;
     private final TeamRepository teamRepository;
     private final PlayerMapper playerMapper;
+    private final PlayerService playerService;
 
     @Override
     public TeamResponse createTeam(TeamCreateRequest teamCreateRequest) {
-        TeamValidContext teamValidContext = teamValidator.validatePlayerRequest(teamCreateRequest);
+        TeamValidContext teamValidContext = teamValidator.validateTeamRequest(teamCreateRequest);
         Team unsavedTeam = buildTeamEntity(teamValidContext);
 
         Team savedTeam = teamRepository.save(unsavedTeam);
@@ -65,5 +67,21 @@ public class TeamManagementServiceImpl implements TeamManagementService {
         return teams.stream()
                 .map(this::buildTeamResponse)
                 .toList();
+    }
+
+    @Override
+    public TeamResponse updateTeamById(Long teamId, TeamUpdateRequest teamUpdateRequest) {
+        teamValidator.validateTeamRequest(teamId, teamUpdateRequest);
+        Team existingTeam = fetchTeamById(teamId);
+        Team updatedTeam = buildTeamEntity(existingTeam, teamUpdateRequest);
+        Team savedTeam = teamRepository.save(updatedTeam);
+        return buildTeamResponse(savedTeam);
+    }
+
+    public Team buildTeamEntity(Team existingTeam, TeamUpdateRequest teamUpdateRequest) {
+        existingTeam.setTeamName(teamUpdateRequest.getTeamName());
+        existingTeam.setCaptain(playerService.fetchPlayerById(teamUpdateRequest.getCaptain()));
+        existingTeam.setViceCaptain(playerService.fetchPlayerById(teamUpdateRequest.getViceCaptain()));
+        return existingTeam;
     }
 }
