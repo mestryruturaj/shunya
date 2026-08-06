@@ -17,8 +17,8 @@ SeasonPlayer
     - delete (hard delete) //done
 
 Team
-    - create
-    - read a team
+    - create //done
+    - read a team //done
     - read all teams
     - delete (hard delete)
 

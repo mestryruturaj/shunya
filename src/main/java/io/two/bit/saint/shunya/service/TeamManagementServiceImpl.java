@@ -3,6 +3,7 @@ package io.two.bit.saint.shunya.service;
 import io.two.bit.saint.shunya.dao.TeamRepository;
 import io.two.bit.saint.shunya.dto.TeamValidContext;
 import io.two.bit.saint.shunya.entity.Team;
+import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.PlayerMapper;
 import io.two.bit.saint.shunya.validator.TeamValidator;
 import lombok.RequiredArgsConstructor;
@@ -42,5 +43,17 @@ public class TeamManagementServiceImpl implements TeamManagementService {
         teamResponse.setCaptain(playerMapper.mapToPlayerInfoFromPlayerEntity(team.getCaptain()));
         teamResponse.setViceCaptain(playerMapper.mapToPlayerInfoFromPlayerEntity(team.getViceCaptain()));
         return teamResponse;
+    }
+
+    @Override
+    public TeamResponse getTeamById(Long teamId) {
+        teamValidator.validateIdField(teamId, Team.class.getSimpleName());
+        Team team = fetchTeamById(teamId);
+        return buildTeamResponse(team);
+    }
+
+    public Team fetchTeamById(Long teamId) {
+        return teamRepository.findById(teamId)
+                .orElseThrow(() -> new InvalidArgumentException("Team not found with id: " + teamId));
     }
 }
