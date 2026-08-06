@@ -11,6 +11,8 @@ import org.openapitools.model.TeamCreateRequest;
 import org.openapitools.model.TeamResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TeamManagementServiceImpl implements TeamManagementService {
@@ -55,5 +57,13 @@ public class TeamManagementServiceImpl implements TeamManagementService {
     public Team fetchTeamById(Long teamId) {
         return teamRepository.findById(teamId)
                 .orElseThrow(() -> new InvalidArgumentException("Team not found with id: " + teamId));
+    }
+
+    @Override
+    public List<TeamResponse> getAllTeams() {
+        List<Team> teams = teamRepository.findAll();
+        return teams.stream()
+                .map(this::buildTeamResponse)
+                .toList();
     }
 }

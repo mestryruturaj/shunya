@@ -19,7 +19,7 @@ SeasonPlayer
 Team
     - create //done
     - read a team //done
-    - read all teams
+    - read all teams //done
     - delete (hard delete)
 
 SeasonTeam
