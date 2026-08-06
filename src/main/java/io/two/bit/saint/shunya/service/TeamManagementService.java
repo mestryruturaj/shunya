@@ -6,4 +6,6 @@ import org.openapitools.model.TeamResponse;
 public interface TeamManagementService {
 
     TeamResponse createTeam(TeamCreateRequest teamCreateRequest);
+
+    TeamResponse getTeamById(Long teamId);
 }
