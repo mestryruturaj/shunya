@@ -19,4 +19,9 @@ public class TeamManagementApiDelegateImpl implements TeamManagementApiDelegate 
     public ResponseEntity<TeamResponse> createTeam(TeamCreateRequest teamCreateRequest) {
         return new ResponseEntity<>(teamManagementService.createTeam(teamCreateRequest), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<TeamResponse> getTeamById(Long teamId) {
+        return new ResponseEntity<>(teamManagementService.getTeamById(teamId), HttpStatus.OK);
+    }
 }
