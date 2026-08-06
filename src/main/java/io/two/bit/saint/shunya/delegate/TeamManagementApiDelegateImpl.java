@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class TeamManagementApiDelegateImpl implements TeamManagementApiDelegate {
@@ -23,5 +25,10 @@ public class TeamManagementApiDelegateImpl implements TeamManagementApiDelegate 
     @Override
     public ResponseEntity<TeamResponse> getTeamById(Long teamId) {
         return new ResponseEntity<>(teamManagementService.getTeamById(teamId), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<TeamResponse>> getAllTeams() {
+        return new ResponseEntity<>(teamManagementService.getAllTeams(), HttpStatus.OK);
     }
 }
