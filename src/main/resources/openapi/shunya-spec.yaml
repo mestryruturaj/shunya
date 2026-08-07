@@ -54,3 +54,5 @@ paths:
     $ref: './paths/team.yaml#/team'
   /team/{team-id}:
     $ref: './paths/team.yaml#/teamById'
+  /season-team:
+    $ref: './paths/season-team.yaml#/seasonTeam'

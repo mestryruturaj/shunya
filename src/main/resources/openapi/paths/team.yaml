@@ -146,6 +146,10 @@ components:
         viceCaptain:
           $ref: './player.yaml#/components/schemas/PlayerInfo'
 
+    TeamInfo:
+      allOf:
+        - $ref: '#/components/schemas/TeamResponse'
+
   parameters:
     teamId:
       name: team-id
