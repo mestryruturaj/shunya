@@ -73,6 +73,10 @@ public class TeamManagementServiceImpl implements TeamManagementService {
     public TeamResponse updateTeamById(Long teamId, TeamUpdateRequest teamUpdateRequest) {
         teamValidator.validateTeamRequest(teamId, teamUpdateRequest);
         Team existingTeam = fetchTeamById(teamId);
+        if (!whetherTeamDistinct(existingTeam, teamUpdateRequest)) {
+            return buildTeamResponse(existingTeam);
+        }
+
         Team updatedTeam = buildTeamEntity(existingTeam, teamUpdateRequest);
         Team savedTeam = teamRepository.save(updatedTeam);
         return buildTeamResponse(savedTeam);
@@ -83,5 +87,19 @@ public class TeamManagementServiceImpl implements TeamManagementService {
         existingTeam.setCaptain(playerService.fetchPlayerById(teamUpdateRequest.getCaptain()));
         existingTeam.setViceCaptain(playerService.fetchPlayerById(teamUpdateRequest.getViceCaptain()));
         return existingTeam;
+    }
+
+    private boolean whetherTeamDistinct(Team savedTeam, TeamUpdateRequest teamUpdateRequest) {
+        return !savedTeam.getTeamName().equals(teamUpdateRequest.getTeamName()) ||
+                !savedTeam.getCaptain().getId().equals(teamUpdateRequest.getCaptain()) ||
+                !savedTeam.getViceCaptain().getId().equals(teamUpdateRequest.getViceCaptain());
+    }
+
+    @Override
+    public TeamResponse deleteTeamById(Long teamId) {
+        teamValidator.validateIdField(teamId, Team.class.getSimpleName());
+        Team existingTeam = fetchTeamById(teamId);
+        teamRepository.delete(existingTeam);
+        return buildTeamResponse(existingTeam);
     }
 }

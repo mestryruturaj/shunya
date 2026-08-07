@@ -16,4 +16,6 @@ public interface TeamManagementService {
     List<TeamResponse> getAllTeams();
 
     TeamResponse updateTeamById(Long teamId, TeamUpdateRequest teamUpdateRequest);
+
+    TeamResponse deleteTeamById(Long teamId);
 }
