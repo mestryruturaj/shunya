@@ -88,6 +88,25 @@ teamById:
           $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
           $ref: '../components.yaml#/components/responses/InternalServerError'
+  delete:
+    tags:
+      - TeamManagement
+    operationId: deleteTeamById
+    parameters:
+      - $ref: '#/components/parameters/teamId'
+    responses:
+      '200':
+        description: Team details retrieved successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
 
 components:
   schemas:
