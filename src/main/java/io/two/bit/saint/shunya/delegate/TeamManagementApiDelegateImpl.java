@@ -37,4 +37,9 @@ public class TeamManagementApiDelegateImpl implements TeamManagementApiDelegate 
     public ResponseEntity<TeamResponse> updateTeamById(Long teamId, TeamUpdateRequest teamUpdateRequest) {
         return new ResponseEntity<>(teamManagementService.updateTeamById(teamId, teamUpdateRequest), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<TeamResponse> deleteTeamById(Long teamId) {
+        return new ResponseEntity<>(teamManagementService.deleteTeamById(teamId), HttpStatus.OK);
+    }
 }
