@@ -52,11 +52,11 @@ public class TeamManagementServiceImpl implements TeamManagementService {
     @Override
     public TeamResponse getTeamById(Long teamId) {
         teamValidator.validateIdField(teamId, Team.class.getSimpleName());
-        Team team = fetchTeamById(teamId);
+        Team team = fetchById(teamId);
         return buildTeamResponse(team);
     }
 
-    public Team fetchTeamById(Long teamId) {
+    public Team fetchById(Long teamId) {
         return teamRepository.findById(teamId)
                 .orElseThrow(() -> new InvalidArgumentException("Team not found with id: " + teamId));
     }
@@ -72,7 +72,7 @@ public class TeamManagementServiceImpl implements TeamManagementService {
     @Override
     public TeamResponse updateTeamById(Long teamId, TeamUpdateRequest teamUpdateRequest) {
         teamValidator.validateTeamRequest(teamId, teamUpdateRequest);
-        Team existingTeam = fetchTeamById(teamId);
+        Team existingTeam = fetchById(teamId);
         if (!whetherTeamDistinct(existingTeam, teamUpdateRequest)) {
             return buildTeamResponse(existingTeam);
         }
@@ -98,7 +98,7 @@ public class TeamManagementServiceImpl implements TeamManagementService {
     @Override
     public TeamResponse deleteTeamById(Long teamId) {
         teamValidator.validateIdField(teamId, Team.class.getSimpleName());
-        Team existingTeam = fetchTeamById(teamId);
+        Team existingTeam = fetchById(teamId);
         teamRepository.delete(existingTeam);
         return buildTeamResponse(existingTeam);
     }
