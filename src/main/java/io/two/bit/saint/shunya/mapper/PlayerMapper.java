@@ -5,10 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
-import org.openapitools.model.PlayerCreateRequest;
-import org.openapitools.model.PlayerDto;
-import org.openapitools.model.PlayerInfo;
-import org.openapitools.model.PlayerUpdateRequest;
+import org.openapitools.model.*;
 
 import java.net.URI;
 
@@ -30,4 +27,6 @@ public interface PlayerMapper {
     public Player mapToPlayerEntityFromPlayerUpdateRequest(PlayerUpdateRequest playerUpdateRequest);
 
     public PlayerInfo mapToPlayerInfoFromPlayerEntity(Player player);
+
+    public PlayerSummary mapToPlayerSummary(Player player);
 }
