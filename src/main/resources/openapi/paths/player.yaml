@@ -144,3 +144,17 @@ components:
     PlayerInfo:
       allOf:
       - $ref: '../components.yaml#/components/schemas/PlayerDto'
+
+    PlayerSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: "Sachin Tendulkar"
+        country:
+          type: string
+          example: "India"

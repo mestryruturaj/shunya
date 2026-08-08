@@ -146,9 +146,21 @@ components:
         viceCaptain:
           $ref: './player.yaml#/components/schemas/PlayerInfo'
 
-    TeamInfo:
-      allOf:
-        - $ref: '#/components/schemas/TeamResponse'
+    TeamSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        teamName:
+          type: string
+          example: "Warriors"
+        captain:
+          $ref: './player.yaml#/components/schemas/PlayerSummary'
+        viceCaptain:
+          $ref: './player.yaml#/components/schemas/PlayerSummary'
+
 
   parameters:
     teamId:

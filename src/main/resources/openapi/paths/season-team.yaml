@@ -56,6 +56,6 @@ components:
           format: int64
           example: 1
         season:
-          $ref: './season.yaml#/components/schemas/SeasonInfo'
+          $ref: './season.yaml#/components/schemas/SeasonSummary'
         team:
-          $ref: './team.yaml#/components/schemas/TeamInfo'
+          $ref: './team.yaml#/components/schemas/TeamSummary'
