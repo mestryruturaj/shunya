@@ -24,6 +24,29 @@ seasonTeam:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+seasonTeamById:
+  get:
+    tags:
+      - SeasonTeamManagement
+    operationId: getSeasonTeamById
+    summary: Get season team details by ID
+    parameters:
+      - $ref: '#/components/parameters/seasonTeamId'
+    responses:
+      '200':
+        description: Season team created successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonTeamResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
+
 components:
   schemas:
     SeasonTeamBase:
@@ -59,3 +82,14 @@ components:
           $ref: './season.yaml#/components/schemas/SeasonSummary'
         team:
           $ref: './team.yaml#/components/schemas/TeamSummary'
+
+
+  parameters:
+    seasonTeamId:
+      name: season-team-id
+      in: path
+      required: true
+      description: Unique identifier for the season team
+      schema:
+        type: integer
+        format: int64

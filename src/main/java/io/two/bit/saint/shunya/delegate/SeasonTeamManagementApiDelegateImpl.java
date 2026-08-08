@@ -18,4 +18,9 @@ public class SeasonTeamManagementApiDelegateImpl implements SeasonTeamManagement
     public ResponseEntity<SeasonTeamResponse> createSeasonTeam(SeasonTeamCreateRequest seasonTeamCreateRequest) {
         return new ResponseEntity<>(seasonTeamManagementService.createSeasonTeam(seasonTeamCreateRequest), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<SeasonTeamResponse> getSeasonTeamById(Long seasonTeamId) {
+        return new ResponseEntity<>(seasonTeamManagementService.getSeasonTeamById(seasonTeamId), HttpStatus.OK);
+    }
 }
