@@ -24,7 +24,7 @@ Team
     - delete (hard delete) //done
 
 SeasonTeam
-    - create
+    - create //done
     - read a team
     - read all teams of a season
     - delete (hard delete)
