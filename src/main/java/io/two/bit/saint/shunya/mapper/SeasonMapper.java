@@ -7,6 +7,7 @@ import org.mapstruct.ReportingPolicy;
 import org.openapitools.model.SeasonBase;
 import org.openapitools.model.SeasonInfo;
 import org.openapitools.model.SeasonResponse;
+import org.openapitools.model.SeasonSummary;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
@@ -21,4 +22,6 @@ public interface SeasonMapper {
     @Mapping(target = "tournamentId", source = "tournament.id")
     @Mapping(target = "seasonId", source = "id")
     public SeasonInfo mapToSeasonInfoFromSeasonEntity(Season season);
+
+    SeasonSummary mapToSeasonSummary(Season season);
 }
