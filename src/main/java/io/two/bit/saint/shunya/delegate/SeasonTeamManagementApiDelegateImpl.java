@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.openapitools.api.SeasonTeamManagementApiDelegate;
 import org.openapitools.model.SeasonTeamCreateRequest;
 import org.openapitools.model.SeasonTeamResponse;
+import org.openapitools.model.SeasonTeamsResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,10 @@ public class SeasonTeamManagementApiDelegateImpl implements SeasonTeamManagement
     @Override
     public ResponseEntity<SeasonTeamResponse> getSeasonTeamById(Long seasonTeamId) {
         return new ResponseEntity<>(seasonTeamManagementService.getSeasonTeamById(seasonTeamId), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<SeasonTeamsResponse> getSeasonTeamsBySeasonId(Long seasonTeamId) {
+        return new ResponseEntity<>(seasonTeamManagementService.getSeasonTeamsBySeasonId(seasonTeamId), HttpStatus.OK);
     }
 }
