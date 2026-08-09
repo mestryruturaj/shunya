@@ -46,6 +46,28 @@ seasonTeamById:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+seasonTeamsBySeasonId:
+  get:
+    tags:
+      - SeasonTeamManagement
+    operationId: getSeasonTeamsBySeasonId
+    summary: Get season teams by season ID
+    parameters:
+      - $ref: '#/components/parameters/seasonId'
+    responses:
+      '200':
+        description: Season teams fetched successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonTeamsResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
 
 components:
   schemas:
@@ -83,10 +105,28 @@ components:
         team:
           $ref: './team.yaml#/components/schemas/TeamSummary'
 
+    SeasonTeamsResponse:
+      type: object
+      properties:
+        season:
+          $ref: './season.yaml#/components/schemas/SeasonSummary'
+        teams:
+          type: array
+          items:
+            $ref: './team.yaml#/components/schemas/TeamSummary'
+
 
   parameters:
     seasonTeamId:
       name: season-team-id
+      in: path
+      required: true
+      description: Unique identifier for the season team
+      schema:
+        type: integer
+        format: int64
+    seasonId:
+      name: season-id
       in: path
       required: true
       description: Unique identifier for the season team
