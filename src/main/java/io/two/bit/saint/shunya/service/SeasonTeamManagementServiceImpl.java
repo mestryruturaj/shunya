@@ -65,4 +65,12 @@ public class SeasonTeamManagementServiceImpl implements SeasonTeamManagementServ
 
         return seasonTeamsResponse;
     }
+
+    @Override
+    public SeasonTeamResponse deleteSeasonTeamById(Long seasonTeamId) {
+        seasonTeamValidator.validateIdField(seasonTeamId, SeasonTeam.class.getSimpleName());
+        SeasonTeam seasonTeam = fetchById(seasonTeamId);
+        seasonTeamRepository.delete(seasonTeam);
+        return seasonTeamMapper.mapToSeasonTeamResponse(seasonTeam);
+    }
 }

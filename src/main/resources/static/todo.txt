@@ -27,7 +27,7 @@ SeasonTeam
     - create //done
     - read //done
     - read all //done
-    - delete (hard delete)
+    - delete (hard delete) //done
 
 - auction
     - create
