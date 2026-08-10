@@ -46,6 +46,27 @@ seasonTeamById:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+  delete:
+    tags:
+      - SeasonTeamManagement
+    operationId: deleteSeasonTeamById
+    summary: Delete season team details by ID
+    parameters:
+      - $ref: '#/components/parameters/seasonTeamId'
+    responses:
+      '200':
+        description: Season team created successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonTeamResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
 seasonTeamsBySeasonId:
   get:
     tags:
