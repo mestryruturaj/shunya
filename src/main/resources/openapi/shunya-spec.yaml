@@ -60,3 +60,5 @@ paths:
     $ref: './paths/season-team.yaml#/seasonTeamById'
   /season-team/season/{season-id}/team:
     $ref: './paths/season-team.yaml#/seasonTeamsBySeasonId'
+  /auction:
+    $ref: './paths/auction.yaml#/auction'

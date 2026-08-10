@@ -100,3 +100,31 @@ tournamentById:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+
+components:
+  schemas:
+    TournamentSummary:
+      description: object for tournament summary
+      type: object
+      properties:
+        id:
+          $ref: '#/components/properties/id'
+        title:
+          $ref: '#/components/properties/title'
+        country:
+          $ref: '#/components/properties/country'
+
+  properties:
+    id:
+      type: integer
+      format: int64
+      description: Unique identifier for the entity
+      example: 101
+    title:
+      type: string
+      description: Title of the event or entity
+      example: "IPL 2025"
+    country:
+      type: string
+      description: Country associated with the entity
+      example: "India"
