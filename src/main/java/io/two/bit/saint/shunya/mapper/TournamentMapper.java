@@ -5,6 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.openapitools.model.TournamentCreateRequest;
 import org.openapitools.model.TournamentResponse;
+import org.openapitools.model.TournamentSummary;
 import org.openapitools.model.TournamentUpdateRequest;
 
 @Mapper(componentModel = "spring",
@@ -16,4 +17,6 @@ public interface TournamentMapper {
     public TournamentResponse mapToTournamentResponseFromTournament(Tournament tournament);
 
     public Tournament mapToTournamentFromTournamentUpdateRequest(TournamentUpdateRequest tournamentUpdateRequest);
+
+    TournamentSummary mapToTournamentSummary(Tournament tournament);
 }

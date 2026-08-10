@@ -4,6 +4,7 @@ import io.two.bit.saint.shunya.dao.TournamentRepository;
 import io.two.bit.saint.shunya.entity.Tournament;
 import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.TournamentMapper;
+import io.two.bit.saint.shunya.validator.TournamentValidator;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.TournamentCreateRequest;
 import org.openapitools.model.TournamentResponse;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class TournamentServiceImpl implements TournamentService {
     private final TournamentRepository tournamentRepository;
     private final TournamentMapper tournamentMapper;
+    private final TournamentValidator tournamentValidator;
 
     @Override
     public TournamentResponse createTournament(TournamentCreateRequest tournamentCreateRequest) {
@@ -59,5 +61,13 @@ public class TournamentServiceImpl implements TournamentService {
         } else {
             throw new InvalidArgumentException("Tournament not found with id: " + tournamentId);
         }
+    }
+
+    @Override
+    public Tournament fetchBuId(Long id) {
+        tournamentValidator.validateIdField(id, Tournament.class.getSimpleName());
+
+        return tournamentRepository.findById(id)
+                .orElseThrow(() -> new InvalidArgumentException("Tournament not found with id: " + id));
     }
 }
