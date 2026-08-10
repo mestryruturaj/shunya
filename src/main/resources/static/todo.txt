@@ -30,7 +30,7 @@ SeasonTeam
     - delete (hard delete) //done
 
 - auction
-    - create
+    - create //done
     - read
     - update
     - delete
