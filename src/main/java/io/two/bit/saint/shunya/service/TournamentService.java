@@ -14,5 +14,5 @@ public interface TournamentService {
 
     TournamentResponse deleteTournament(Long tournamentId);
 
-    Tournament fetchBuId(Long id);
+    Tournament fetchById(Long id);
 }

@@ -64,7 +64,7 @@ public class TournamentServiceImpl implements TournamentService {
     }
 
     @Override
-    public Tournament fetchBuId(Long id) {
+    public Tournament fetchById(Long id) {
         tournamentValidator.validateIdField(id, Tournament.class.getSimpleName());
 
         return tournamentRepository.findById(id)
