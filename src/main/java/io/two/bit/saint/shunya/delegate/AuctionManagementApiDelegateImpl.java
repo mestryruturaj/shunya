@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.openapitools.api.AuctionManagementApiDelegate;
 import org.openapitools.model.AuctionCreateRequest;
 import org.openapitools.model.AuctionResponse;
+import org.openapitools.model.AuctionUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -23,5 +24,10 @@ public class AuctionManagementApiDelegateImpl implements AuctionManagementApiDel
     @Override
     public ResponseEntity<AuctionResponse> getAuctionById(Long auctionId) {
         return new ResponseEntity<>(auctionManagementService.getAuctionById(auctionId), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<AuctionResponse> updateAuctionById(Long auctionId, AuctionUpdateRequest auctionUpdateRequest) {
+        return new ResponseEntity<>(auctionManagementService.updateAuctionById(auctionId, auctionUpdateRequest), HttpStatus.OK);
     }
 }
