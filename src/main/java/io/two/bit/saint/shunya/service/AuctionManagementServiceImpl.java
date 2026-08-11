@@ -5,11 +5,13 @@ import io.two.bit.saint.shunya.dto.AuctionValidContext;
 import io.two.bit.saint.shunya.entity.Auction;
 import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.AuctionMapper;
+import io.two.bit.saint.shunya.utils.ComparisonUtils;
 import io.two.bit.saint.shunya.validator.AuctionValidator;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.AuctionBase;
 import org.openapitools.model.AuctionCreateRequest;
 import org.openapitools.model.AuctionResponse;
+import org.openapitools.model.AuctionUpdateRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,5 +48,41 @@ public class AuctionManagementServiceImpl implements AuctionManagementService {
         auctionValidator.validateIdField(id, Auction.class.getSimpleName());
         return auctionRepository.findById(id)
                 .orElseThrow(() -> new InvalidArgumentException("Auction not found with id: " + id));
+    }
+
+    @Override
+    public AuctionResponse updateAuctionById(Long auctionId, AuctionUpdateRequest auctionUpdateRequest) {
+        Auction fetchedAuction = fetchById(auctionId);
+        Auction updatedAuction = updateAuctionEntity(fetchedAuction, auctionUpdateRequest);
+        Auction savedAuction = auctionRepository.save(updatedAuction);
+        return auctionMapper.mapToAuctionResponse(savedAuction);
+    }
+
+    private Auction updateAuctionEntity(Auction existingAuction, AuctionUpdateRequest auctionUpdateRequest) {
+        boolean isUpdated = false;
+        if (!ComparisonUtils.equals(auctionUpdateRequest.getTournamentId(), existingAuction.getTournament().getId())
+                || !ComparisonUtils.equals(auctionUpdateRequest.getSeasonId(), existingAuction.getSeason().getId())) {
+            AuctionValidContext auctionValidContext = auctionValidator.validateAuctionRequest(auctionUpdateRequest);
+            existingAuction.setTournament(auctionValidContext.getTournament());
+            existingAuction.setSeason(auctionValidContext.getSeason());
+            isUpdated = true;
+        }
+        if (!ComparisonUtils.equals(auctionUpdateRequest.getTime(), existingAuction.getTime())) {
+            existingAuction.setTime(auctionUpdateRequest.getTime());
+            isUpdated = true;
+        }
+        if (!ComparisonUtils.equals(auctionUpdateRequest.getVenue(), existingAuction.getVenue())) {
+            existingAuction.setVenue(auctionUpdateRequest.getVenue());
+            isUpdated = true;
+        }
+        if (!ComparisonUtils.equals(auctionUpdateRequest.getOrganizer(), existingAuction.getOrganizer())) {
+            existingAuction.setOrganizer(auctionUpdateRequest.getOrganizer());
+            isUpdated = true;
+        }
+
+        if (!isUpdated) {
+            throw new InvalidArgumentException("Nothing to update in the request.");
+        }
+        return existingAuction;
     }
 }
