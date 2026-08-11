@@ -45,6 +45,30 @@ auctionById:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+  put:
+    tags:
+      - AuctionManagement
+    operationId: updateAuctionById
+    parameters:
+      - $ref: '#/components/parameters/auctionId'
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuctionUpdateRequest'
+    responses:
+      '200':
+        description: Auction details updated successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuctionResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
 
 components:
   schemas:
@@ -69,8 +93,19 @@ components:
         organizer:
           type: string
           description: Organizer of the auction
+      required:
+        - tournamentId
+        - seasonId
+        - venue
+        - time
+        - organizer
 
     AuctionCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/AuctionBase'
+        - type: object
+
+    AuctionUpdateRequest:
       allOf:
         - $ref: '#/components/schemas/AuctionBase'
         - type: object

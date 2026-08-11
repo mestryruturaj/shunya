@@ -32,7 +32,7 @@ SeasonTeam
 - auction
     - create //done
     - read //done
-    - update
+    - update //done
     - delete
 
 - business logic for conducting auction

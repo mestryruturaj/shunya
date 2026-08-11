@@ -84,7 +84,8 @@ openApiGenerate {
 		"dateLibrary" to "java8",
 		"jackson" to "true",
 		"withXml" to "false",
-		"performBeanValidation" to "true"
+		"performBeanValidation" to "true",
+		"useAllOf" to "true"
 	))
 
 	// GLOBAL TYPE MAPPING
