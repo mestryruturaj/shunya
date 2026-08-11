@@ -25,6 +25,27 @@ auction:
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
 
+auctionById:
+  get:
+    tags:
+      - AuctionManagement
+    operationId: getAuctionById
+    parameters:
+      - $ref: '#/components/parameters/auctionId'
+    responses:
+      '200':
+        description: Auction details retrieved successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuctionResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
 components:
   schemas:
     AuctionBase:
@@ -74,7 +95,15 @@ components:
           description: Scheduled time of the auction
         organizer:
           type: string
-          description:
-            Organizer of the auction:
+          description: Organizer of the auction
+
+  parameters:
+    auctionId:
+      name: auction-id
+      in: path
+      schema:
+        type: integer
+        format: int64
+        example: 1
 
 
