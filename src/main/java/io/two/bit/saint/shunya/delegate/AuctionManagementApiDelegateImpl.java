@@ -19,4 +19,9 @@ public class AuctionManagementApiDelegateImpl implements AuctionManagementApiDel
     public ResponseEntity<AuctionResponse> createAuction(AuctionCreateRequest auctionCreateRequest) {
         return new ResponseEntity<>(auctionManagementService.createAuction(auctionCreateRequest), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<AuctionResponse> getAuctionById(Long auctionId) {
+        return new ResponseEntity<>(auctionManagementService.getAuctionById(auctionId), HttpStatus.OK);
+    }
 }
