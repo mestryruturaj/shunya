@@ -4,7 +4,6 @@ import io.two.bit.saint.shunya.dto.AuctionValidContext;
 import io.two.bit.saint.shunya.entity.Auction;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
-import org.openapitools.model.AuctionBase;
 import org.openapitools.model.AuctionResponse;
 
 @Mapper(componentModel = "spring",
