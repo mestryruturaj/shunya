@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class AuctionValidator {
+public class AuctionValidator extends BaseValidator {
     private final TournamentService tournamentService;
     private final SeasonManagementService seasonManagementService;
 

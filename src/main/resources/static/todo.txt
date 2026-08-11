@@ -31,7 +31,7 @@ SeasonTeam
 
 - auction
     - create //done
-    - read
+    - read //done
     - update
     - delete
 

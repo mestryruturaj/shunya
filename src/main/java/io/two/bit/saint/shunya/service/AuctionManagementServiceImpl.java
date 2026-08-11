@@ -3,6 +3,7 @@ package io.two.bit.saint.shunya.service;
 import io.two.bit.saint.shunya.dao.AuctionRepository;
 import io.two.bit.saint.shunya.dto.AuctionValidContext;
 import io.two.bit.saint.shunya.entity.Auction;
+import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.AuctionMapper;
 import io.two.bit.saint.shunya.validator.AuctionValidator;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,18 @@ public class AuctionManagementServiceImpl implements AuctionManagementService {
         auction.setTime(auctionBase.getTime());
         auction.setOrganizer(auctionBase.getOrganizer());
         return auction;
+    }
+
+    @Override
+    public AuctionResponse getAuctionById(Long id) {
+        Auction fetchedAuction = fetchById(id);
+        return auctionMapper.mapToAuctionResponse(fetchedAuction);
+    }
+
+    @Override
+    public Auction fetchById(Long id) {
+        auctionValidator.validateIdField(id, Auction.class.getSimpleName());
+        return auctionRepository.findById(id)
+                .orElseThrow(() -> new InvalidArgumentException("Auction not found with id: " + id));
     }
 }
