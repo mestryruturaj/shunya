@@ -85,4 +85,11 @@ public class AuctionManagementServiceImpl implements AuctionManagementService {
         }
         return existingAuction;
     }
+
+    @Override
+    public AuctionResponse deleteAuctionById(Long auctionId) {
+        Auction fetchedAuction = fetchById(auctionId);
+        auctionRepository.delete(fetchedAuction);
+        return auctionMapper.mapToAuctionResponse(fetchedAuction);
+    }
 }
