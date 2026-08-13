@@ -69,6 +69,26 @@ auctionById:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+  delete:
+    tags:
+      - AuctionManagement
+    operationId: deleteAuctionById
+    parameters:
+      - $ref: '#/components/parameters/auctionId'
+    responses:
+      '200':
+        description: Auction details deleted successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuctionResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
 
 components:
   schemas:
