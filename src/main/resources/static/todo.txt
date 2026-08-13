@@ -33,7 +33,10 @@ SeasonTeam
     - create //done
     - read //done
     - update //done
-    - delete
+    - delete //done
+
+- enhancement: make auction organizer a player instead of a string
+- transactional
 
 - business logic for conducting auction
     - start auction
