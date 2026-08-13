@@ -14,4 +14,6 @@ public interface AuctionManagementService {
     Auction fetchById(Long id);
 
     AuctionResponse updateAuctionById(Long auctionId, AuctionUpdateRequest auctionUpdateRequest);
+
+    AuctionResponse deleteAuctionById(Long auctionId);
 }
