@@ -30,4 +30,9 @@ public class AuctionManagementApiDelegateImpl implements AuctionManagementApiDel
     public ResponseEntity<AuctionResponse> updateAuctionById(Long auctionId, AuctionUpdateRequest auctionUpdateRequest) {
         return new ResponseEntity<>(auctionManagementService.updateAuctionById(auctionId, auctionUpdateRequest), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<AuctionResponse> deleteAuctionById(Long auctionId) {
+        return new ResponseEntity<>(auctionManagementService.deleteAuctionById(auctionId), HttpStatus.OK);
+    }
 }
