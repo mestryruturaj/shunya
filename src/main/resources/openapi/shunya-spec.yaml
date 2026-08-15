@@ -64,3 +64,5 @@ paths:
     $ref: './paths/auction.yaml#/auction'
   /auction/{auction-id}:
     $ref: './paths/auction.yaml#/auctionById'
+  /organizer:
+    $ref: './paths/organizer.yaml#/organizer'

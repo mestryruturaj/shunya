@@ -4,7 +4,7 @@ import io.two.bit.saint.shunya.dao.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserValidator {
+public class UserValidator extends BaseValidator {
 
     private final UserRepository userRepository;
 

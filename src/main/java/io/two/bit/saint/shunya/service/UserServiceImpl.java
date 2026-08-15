@@ -3,8 +3,11 @@ package io.two.bit.saint.shunya.service;
 import io.micrometer.common.util.StringUtils;
 import io.two.bit.saint.shunya.dao.UserRepository;
 import io.two.bit.saint.shunya.entity.User;
+import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.UserMapper;
+import io.two.bit.saint.shunya.validator.BaseValidator;
 import io.two.bit.saint.shunya.validator.UserValidator;
+import lombok.RequiredArgsConstructor;
 import org.openapitools.model.LoginRequest;
 import org.openapitools.model.LoginResponse;
 import org.openapitools.model.SignupRequest;
@@ -15,20 +18,15 @@ import java.util.Objects;
 
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserValidator userValidator;
     private final UserMapper userMapper;
+    private final UserValidator validator;
 
     public static final String JWT_PLACEHOLDER = "JWT_PLACEHOLDER";
-
-    public UserServiceImpl(UserRepository userRepository, UserValidator userValidator,
-                           UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userValidator = userValidator;
-        this.userMapper = userMapper;
-    }
 
     @Override
     public UserDto signup(SignupRequest signupRequest) {
@@ -62,5 +60,12 @@ public class UserServiceImpl implements UserService {
         loginResponse.setMessage("User successfully logged in.");
         loginResponse.setToken(JWT_PLACEHOLDER);
         return loginResponse;
+    }
+
+    @Override
+    public User fetchbyId(Long id) {
+        validator.validateIdField(id, User.class.getSimpleName());
+        return userRepository.findById(id)
+                .orElseThrow(()-> new InvalidArgumentException("User with id " + id + " does not exist."));
     }
 }
