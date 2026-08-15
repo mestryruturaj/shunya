@@ -18,4 +18,9 @@ public class OrganizerManagementApiDelegateImpl implements OrganizerManagementAp
     public ResponseEntity<OrganizerResponse> createOrganizer(OrganizerCreateRequest organizerCreateRequest) {
         return new ResponseEntity<>(organizerManagementService.createOrganizer(organizerCreateRequest), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<OrganizerResponse> getOrganizerById(Long organizerId) {
+        return new ResponseEntity<>(organizerManagementService.getOrganizerById(organizerId), HttpStatus.OK);
+    }
 }
