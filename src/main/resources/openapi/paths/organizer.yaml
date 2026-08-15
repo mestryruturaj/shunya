@@ -11,7 +11,7 @@ organizer:
             $ref: '#/components/schemas/OrganizerCreateRequest'
     responses:
       '201':
-        description: Season created successfully
+        description: Organizer created successfully
         content:
           application/json:
             schema:
@@ -22,6 +22,28 @@ organizer:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+
+organizerById:
+  get:
+    tags:
+      - OrganizerManagement
+    operationId: getOrganizerById
+    parameters:
+      - $ref: '#/components/parameters/organizerId'
+    responses:
+      '200':
+        description: Organizer fetched successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizerResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
 
 components:
   schemas:
@@ -51,3 +73,11 @@ components:
         id:
           type: integer
           format: int64
+
+  parameters:
+    organizerId:
+      name: organizer-id
+      in: path
+      schema:
+        type: integer
+        format: int64
