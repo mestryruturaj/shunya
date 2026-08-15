@@ -8,4 +8,6 @@ public interface OrganizerManagementService {
     OrganizerResponse createOrganizer(OrganizerCreateRequest organizerCreateRequest);
 
     Organizer fetchById(Long id);
+
+    OrganizerResponse getOrganizerById(Long organizerId);
 }

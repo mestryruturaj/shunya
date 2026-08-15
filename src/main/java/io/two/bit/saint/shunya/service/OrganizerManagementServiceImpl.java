@@ -10,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.openapitools.model.OrganizerCreateRequest;
 import org.openapitools.model.OrganizerResponse;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,5 +37,11 @@ public class OrganizerManagementServiceImpl implements OrganizerManagementServic
         validator.validateIdField(id, Organizer.class.getSimpleName());
         return organizerRepository.findById(id)
                 .orElseThrow(() -> new InvalidArgumentException("Organizer with id " + id + " does not exist."));
+    }
+
+    @Override
+    public OrganizerResponse getOrganizerById(Long organizerId) {
+        Organizer fetchedOrganizer = fetchById(organizerId);
+        return organizerMapper.mapToOrganizerResponse(fetchedOrganizer);
     }
 }
