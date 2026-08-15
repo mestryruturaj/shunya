@@ -10,4 +10,6 @@ public interface OrganizerManagementService {
     Organizer fetchById(Long id);
 
     OrganizerResponse getOrganizerById(Long organizerId);
+
+    OrganizerResponse deleteOrganizerById(Long organizerId);
 }

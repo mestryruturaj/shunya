@@ -43,6 +43,26 @@ organizerById:
         $ref: '../components.yaml#/components/responses/Unauthorized'
       '500':
         $ref: '../components.yaml#/components/responses/InternalServerError'
+  delete:
+    tags:
+      - OrganizerManagement
+    operationId: deleteOrganizerById
+    parameters:
+      - $ref: '#/components/parameters/organizerId'
+    responses:
+      '200':
+        description: Organizer deleted successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizerResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
 
 
 components:

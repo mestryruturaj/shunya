@@ -23,4 +23,9 @@ public class OrganizerManagementApiDelegateImpl implements OrganizerManagementAp
     public ResponseEntity<OrganizerResponse> getOrganizerById(Long organizerId) {
         return new ResponseEntity<>(organizerManagementService.getOrganizerById(organizerId), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<OrganizerResponse> deleteOrganizerById(Long organizerId) {
+        return new ResponseEntity<>(organizerManagementService.deleteOrganizerById(organizerId), HttpStatus.OK);
+    }
 }

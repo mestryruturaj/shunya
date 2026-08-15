@@ -44,4 +44,11 @@ public class OrganizerManagementServiceImpl implements OrganizerManagementServic
         Organizer fetchedOrganizer = fetchById(organizerId);
         return organizerMapper.mapToOrganizerResponse(fetchedOrganizer);
     }
+
+    @Override
+    public OrganizerResponse deleteOrganizerById(Long organizerId) {
+        Organizer fetchedOrganizer = fetchById(organizerId);
+        organizerRepository.delete(fetchedOrganizer);
+        return organizerMapper.mapToOrganizerResponse(fetchedOrganizer);
+    }
 }
