@@ -40,6 +40,11 @@ SeasonTeam
     - read //done
     - delete //done
 
+- AuctionOrganizer
+    - create
+    - read
+    - delete
+
 - enhancement: make auction organizer a player instead of a string
 - transactional
 
