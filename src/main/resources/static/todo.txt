@@ -40,9 +40,14 @@ SeasonTeam
     - read //done
     - delete //done
 
+- AuctionOrganizer
+    - create //done
+    - read
+    - delete
+
 - enhancement: make auction organizer a player instead of a string
 - transactional
-
+- add audit fields to entity
 - business logic for conducting auction
     - start auction
     - end auction

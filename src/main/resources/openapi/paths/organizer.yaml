@@ -94,6 +94,18 @@ components:
           type: integer
           format: int64
 
+    OrganizerSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        name:
+          type: string
+
   parameters:
     organizerId:
       name: organizer-id

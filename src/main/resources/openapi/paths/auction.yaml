@@ -152,6 +152,25 @@ components:
           type: string
           description: Organizer of the auction
 
+    AuctionSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the auction
+        tournament:
+          $ref: './tournament.yaml#/components/schemas/TournamentSummary'
+        season:
+          $ref: './season.yaml#/components/schemas/SeasonSummary'
+        venue:
+          type: string
+          description: Venue of the auction
+        time:
+          type: string
+          format: date-time
+          description: Scheduled time of the auction
+
   parameters:
     auctionId:
       name: auction-id

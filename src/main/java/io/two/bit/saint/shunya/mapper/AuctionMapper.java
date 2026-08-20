@@ -5,6 +5,7 @@ import io.two.bit.saint.shunya.entity.Auction;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.openapitools.model.AuctionResponse;
+import org.openapitools.model.AuctionSummary;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
@@ -14,4 +15,6 @@ public interface AuctionMapper {
     Auction mapToAuctionEntity(AuctionValidContext auctionValidContext);
 
     AuctionResponse mapToAuctionResponse(Auction auction);
+
+    AuctionSummary mapToAuctionSummary(Auction auction);
 }

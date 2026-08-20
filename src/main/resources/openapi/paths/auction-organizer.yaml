@@ -1,0 +1,63 @@
+auctionOrganizer:
+  post:
+    tags:
+      - AuctionOrganizerManagement
+    operationId: createAuctionOrganizer
+    parameters:
+      - $ref: '#/components/parameters/auctionId'
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuctionOrganizerCreateRequest'
+    responses:
+      '201':
+        description: Player created successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuctionOrganizerResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+
+
+components:
+  schemas:
+    AuctionOrganizerBase:
+      type: object
+      properties:
+        organizerIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+      required:
+        - organizerIds
+
+    AuctionOrganizerCreateRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/AuctionOrganizerBase'
+
+    AuctionOrganizerResponse:
+      type: object
+      properties:
+        auction:
+          $ref: './auction.yaml#/components/schemas/AuctionSummary'
+        organizers:
+          type: array
+          items:
+            $ref: './organizer.yaml#/components/schemas/OrganizerSummary'
+
+
+  parameters:
+    auctionId:
+      name: auction-id
+      schema:
+        type: integer
+        format: int64
+      required: true

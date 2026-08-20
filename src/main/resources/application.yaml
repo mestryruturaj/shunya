@@ -42,3 +42,7 @@ tournament:
       - Tennis (Light)
       - Rubber
       - Tape Ball
+
+auction:
+  organizers:
+    max-limit: 5
