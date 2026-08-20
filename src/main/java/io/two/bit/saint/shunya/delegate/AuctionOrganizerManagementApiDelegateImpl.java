@@ -18,4 +18,9 @@ public class AuctionOrganizerManagementApiDelegateImpl implements AuctionOrganiz
     public ResponseEntity<AuctionOrganizerResponse> createAuctionOrganizer(Long auctionId, AuctionOrganizerCreateRequest auctionOrganizerCreateRequest) {
         return new ResponseEntity(auctionOrganizerManagementService.createAuctionOrganizer(auctionId, auctionOrganizerCreateRequest), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<AuctionOrganizerResponse> getAuctionOrganizersByAuctionId(Long auctionId) {
+        return new ResponseEntity<>(auctionOrganizerManagementService.getAuctionOrganizersByAuctionId(auctionId), HttpStatus.OK);
+    }
 }
