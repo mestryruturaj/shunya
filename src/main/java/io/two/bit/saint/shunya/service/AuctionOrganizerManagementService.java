@@ -5,4 +5,6 @@ import org.openapitools.model.AuctionOrganizerResponse;
 
 public interface AuctionOrganizerManagementService {
     AuctionOrganizerResponse createAuctionOrganizer(Long auctionId, AuctionOrganizerCreateRequest auctionOrganizerCreateRequest);
+
+    AuctionOrganizerResponse getAuctionOrganizersByAuctionId(Long auctionId);
 }

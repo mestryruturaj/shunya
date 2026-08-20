@@ -5,6 +5,7 @@ import io.two.bit.saint.shunya.dto.AuctionOrganizerValidContext;
 import io.two.bit.saint.shunya.entity.Auction;
 import io.two.bit.saint.shunya.entity.AuctionOrganizer;
 import io.two.bit.saint.shunya.entity.Organizer;
+import io.two.bit.saint.shunya.exception.InvalidArgumentException;
 import io.two.bit.saint.shunya.mapper.AuctionMapper;
 import io.two.bit.saint.shunya.mapper.AuctionOrganizerMapper;
 import io.two.bit.saint.shunya.mapper.OrganizerMapper;
@@ -28,6 +29,7 @@ public class AuctionOrganizerManagementServiceImpl implements AuctionOrganizerMa
     private final AuctionMapper auctionMapper;
     private final OrganizerMapper organizerMapper;
     private final AuctionOrganizerValidator auctionOrganizerValidator;
+    private final AuctionManagementService auctionManagementService;
 
     @Override
     public AuctionOrganizerResponse createAuctionOrganizer(Long auctionId, AuctionOrganizerCreateRequest auctionOrganizerCreateRequest) {
@@ -64,5 +66,15 @@ public class AuctionOrganizerManagementServiceImpl implements AuctionOrganizerMa
         auctionOrganizerResponse.setAuction(auctionSummary);
         auctionOrganizerResponse.setOrganizers(organizerSummaryList);
         return auctionOrganizerResponse;
+    }
+
+    @Override
+    public AuctionOrganizerResponse getAuctionOrganizersByAuctionId(Long auctionId) {
+        Auction fetchedAuction = auctionManagementService.fetchById(auctionId);
+        List<AuctionOrganizer> fetchedAuctionOrganizers = auctionOrganizerRepository.findAllByAuctionId(auctionId);
+        if (CollectionUtils.isEmpty(fetchedAuctionOrganizers)) {
+            throw new InvalidArgumentException("Organizers are not yet assigned to the Auction " + auctionId);
+        }
+        return buildAuctionOrganizerResponse(fetchedAuction, fetchedAuctionOrganizers);
     }
 }
