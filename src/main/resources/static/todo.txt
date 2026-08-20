@@ -42,7 +42,7 @@ SeasonTeam
 
 - AuctionOrganizer
     - create //done
-    - read
+    - read //done
     - delete
 
 - enhancement: make auction organizer a player instead of a string
