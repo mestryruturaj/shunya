@@ -37,7 +37,7 @@ public class AuctionOrganizerValidator {
             throw new InvalidArgumentException("AO01: Allowed organizers per auction are " + maxOrganizersPerAuction);
         }
 
-        List<AuctionOrganizer> fetchedAuctionOrganizers = auctionOrganizerRepository.findAllByAuctionId(auctionId);
+        List<AuctionOrganizer> fetchedAuctionOrganizers = auctionOrganizerRepository.findAllByAuctionIdAndIsActive(auctionId, true);
         Set<Long> existingOrganizerIds = fetchedAuctionOrganizers.stream()
                 .map(auctionOrganizer -> auctionOrganizer.getOrganizer().getId())
                 .collect(Collectors.toSet());

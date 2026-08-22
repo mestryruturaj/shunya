@@ -14,4 +14,10 @@ public interface AuctionOrganizerRepository extends JpaRepository<AuctionOrganiz
             + "JOIN FETCH ao.organizer "
             + "WHERE ao.auction.id = :auctionId")
     List<AuctionOrganizer> findAllByAuctionId(@Param("auctionId") Long auctionId);
+
+    @Query("SELECT ao FROM AuctionOrganizer ao "
+            + "JOIN FETCH ao.auction "
+            + "JOIN FETCH ao.organizer "
+            + "WHERE ao.auction.id = :auctionId AND ao.isActive = :isActive")
+    List<AuctionOrganizer> findAllByAuctionIdAndIsActive(@Param("auctionId") Long auctionId, @Param("isActive") boolean isActive);
 }
