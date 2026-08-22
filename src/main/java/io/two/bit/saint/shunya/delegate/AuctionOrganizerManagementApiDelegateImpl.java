@@ -4,6 +4,7 @@ import io.two.bit.saint.shunya.service.AuctionOrganizerManagementService;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.api.AuctionOrganizerManagementApiDelegate;
 import org.openapitools.model.AuctionOrganizerCreateRequest;
+import org.openapitools.model.AuctionOrganizerDeleteRequest;
 import org.openapitools.model.AuctionOrganizerResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,5 +23,10 @@ public class AuctionOrganizerManagementApiDelegateImpl implements AuctionOrganiz
     @Override
     public ResponseEntity<AuctionOrganizerResponse> getAuctionOrganizersByAuctionId(Long auctionId) {
         return new ResponseEntity<>(auctionOrganizerManagementService.getAuctionOrganizersByAuctionId(auctionId), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<AuctionOrganizerResponse> deleteAuctionOrganizersByAuctionId(Long auctionId, AuctionOrganizerDeleteRequest auctionOrganizerDeleteRequest) {
+        return new ResponseEntity<>(auctionOrganizerManagementService.deleteAuctionOrganizersByAuctionId(auctionId, auctionOrganizerDeleteRequest), HttpStatus.OK);
     }
 }
