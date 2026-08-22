@@ -12,14 +12,10 @@ import io.two.bit.saint.shunya.mapper.OrganizerMapper;
 import io.two.bit.saint.shunya.validator.AuctionOrganizerValidator;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
-import org.openapitools.model.AuctionOrganizerCreateRequest;
-import org.openapitools.model.AuctionOrganizerResponse;
-import org.openapitools.model.AuctionSummary;
-import org.openapitools.model.OrganizerSummary;
+import org.openapitools.model.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -54,11 +50,10 @@ public class AuctionOrganizerManagementServiceImpl implements AuctionOrganizerMa
 
     private AuctionOrganizerResponse buildAuctionOrganizerResponse(Auction auction, List<AuctionOrganizer> auctionOrganizers) {
         AuctionOrganizerResponse auctionOrganizerResponse = new AuctionOrganizerResponse();
-        if (CollectionUtils.isEmpty(auctionOrganizers)) {
+        AuctionSummary auctionSummary = auctionMapper.mapToAuctionSummary(auction);
+        if (Objects.isNull(auction) || Objects.isNull(auctionOrganizers)) {
             return auctionOrganizerResponse;
         }
-
-        AuctionSummary auctionSummary = auctionMapper.mapToAuctionSummary(auction);
         List<OrganizerSummary> organizerSummaryList = auctionOrganizers.stream()
                 .map(auctionOrganizer -> organizerMapper.mapToOrganizerSummary(auctionOrganizer.getOrganizer()))
                 .toList();
@@ -71,10 +66,32 @@ public class AuctionOrganizerManagementServiceImpl implements AuctionOrganizerMa
     @Override
     public AuctionOrganizerResponse getAuctionOrganizersByAuctionId(Long auctionId) {
         Auction fetchedAuction = auctionManagementService.fetchById(auctionId);
-        List<AuctionOrganizer> fetchedAuctionOrganizers = auctionOrganizerRepository.findAllByAuctionId(auctionId);
+        List<AuctionOrganizer> fetchedAuctionOrganizers = auctionOrganizerRepository.findAllByAuctionIdAndIsActive(auctionId, true);
         if (CollectionUtils.isEmpty(fetchedAuctionOrganizers)) {
             throw new InvalidArgumentException("Organizers are not yet assigned to the Auction " + auctionId);
         }
         return buildAuctionOrganizerResponse(fetchedAuction, fetchedAuctionOrganizers);
+    }
+
+    @Override
+    public AuctionOrganizerResponse deleteAuctionOrganizersByAuctionId(Long auctionId, AuctionOrganizerDeleteRequest auctionOrganizerDeleteRequest) {
+        // fetch requested data
+        Auction fetchedAuction = auctionManagementService.fetchById(auctionId);
+        List<AuctionOrganizer> fetchedAuctionOrganizers = auctionOrganizerRepository.findAllByAuctionIdAndIsActive(auctionId, true);
+
+        // make requested organizers inactive
+        Set<Long> organizerIdsToDelete = new HashSet<>(auctionOrganizerDeleteRequest.getOrganizerIds());
+        fetchedAuctionOrganizers.stream()
+                .filter(auctionOrganizer -> organizerIdsToDelete.contains(auctionOrganizer.getOrganizer().getId()))
+                .forEach(auctionOrganizerToDelete -> auctionOrganizerToDelete.setActive(false));
+
+        // update the database state
+        List<AuctionOrganizer> updatedAuctionOrganizers = auctionOrganizerRepository.saveAll(fetchedAuctionOrganizers);
+
+        // build response
+        List<AuctionOrganizer> activeAuctionOrganizers = updatedAuctionOrganizers.stream()
+                .filter(AuctionOrganizer::isActive)
+                .toList();
+        return buildAuctionOrganizerResponse(fetchedAuction, activeAuctionOrganizers);
     }
 }
