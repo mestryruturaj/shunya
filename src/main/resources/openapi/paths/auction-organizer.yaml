@@ -31,7 +31,31 @@ auctionOrganizer:
       - $ref: '#/components/parameters/auctionId'
     responses:
       '200':
-        description: Player fetched successfully
+        description: Auction organizers fetched successfully
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuctionOrganizerResponse'
+      '400':
+        $ref: '../components.yaml#/components/responses/BadRequest'
+      '401':
+        $ref: '../components.yaml#/components/responses/Unauthorized'
+      '500':
+        $ref: '../components.yaml#/components/responses/InternalServerError'
+  delete:
+    tags:
+      - AuctionOrganizerManagement
+    operationId: deleteAuctionOrganizersByAuctionId
+    parameters:
+      - $ref: '#/components/parameters/auctionId'
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuctionOrganizerDeleteRequest'
+    responses:
+      '200':
+        description: Auction organizers deleted successfully
         content:
           application/json:
             schema:
@@ -62,6 +86,12 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/AuctionOrganizerBase'
+
+    AuctionOrganizerDeleteRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/AuctionOrganizerBase'
+
 
     AuctionOrganizerResponse:
       type: object
